@@ -40,43 +40,107 @@
             overflow: hidden;
         }
 
-        .header {
-            background: linear-gradient(135deg, #003d82 0%, #0056b3 100%);
-            color: white;
-            padding: 15px 30px;
+        /* ═══════════════════════════════════════════════════
+           NOVO LAYOUT DOIC-8000 — REDESIGN COMPLETO
+        ═══════════════════════════════════════════════════ */
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+        /* SIDEBAR LATERAL */
+        .sidebar {
+            width: 240px;
+            min-width: 240px;
+            background: linear-gradient(180deg, #080f1a 0%, #0d1b2a 60%, #0a1628 100%);
+            border-right: 1px solid rgba(46,109,164,0.25);
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
         }
 
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 40px,
+                rgba(46,109,164,0.03) 40px,
+                rgba(46,109,164,0.03) 41px
+            );
+            pointer-events: none;
         }
 
-        .header-logos {
+        .sidebar-brand {
+            padding: 24px 20px 20px;
+            border-bottom: 1px solid rgba(46,109,164,0.2);
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
-        .logo-container {
-            background: white;
-            border-radius: 8px;
-            padding: 8px;
+        .sidebar-brand-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #1B3A5C, #2E6DA4);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 60px;
-            height: 60px;
+            font-size: 20px;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(46,109,164,0.4);
+        }
+
+        .sidebar-brand-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .sidebar-brand-text h2 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: #e2e8f0;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin: 0 0 2px 0;
+            line-height: 1.2;
+        }
+
+        .sidebar-brand-text p {
+            font-size: 10px;
+            color: rgba(148,163,184,0.7);
+            margin: 0;
+            letter-spacing: 0.5px;
+        }
+
+        /* LOGO CONTAINERS na sidebar */
+        .sidebar-logos {
+            display: flex;
+            gap: 8px;
+            padding: 14px 20px;
+            border-bottom: 1px solid rgba(46,109,164,0.15);
+        }
+
+        .logo-container {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
             cursor: pointer;
             transition: all 0.2s;
-            font-size: 28px;
+            font-size: 20px;
         }
 
         .logo-container:hover {
+            background: rgba(255,255,255,0.1);
             transform: scale(1.05);
         }
 
@@ -86,98 +150,192 @@
             object-fit: contain;
         }
 
-        .logo-placeholder {
-            color: #003d82;
-            font-size: 28px;
-            text-align: center;
-        }
+        .logo-placeholder { color: rgba(148,163,184,0.7); font-size: 18px; }
 
-        .header-info h1 {
-            font-size: 20px;
-            font-weight: 700;
-            margin: 0 0 4px 0;
-            letter-spacing: 0.3px;
-        }
-
-        .header-info p {
-            font-size: 13px;
-            opacity: 0.9;
-            font-weight: 400;
-            margin: 0;
-        }
-
-        .header-actions {
+        /* SEÇÃO DE NAVEGAÇÃO NA SIDEBAR */
+        .sidebar-nav {
+            padding: 16px 12px;
+            flex: 1;
             display: flex;
-            gap: 6px;
-            align-items: center;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 4px;
+            overflow-y: auto;
         }
 
-        .admin-btn {
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 12px;
-            cursor: pointer;
+        .sidebar-section-label {
+            font-size: 9px;
+            font-weight: 700;
+            color: rgba(100,116,139,0.8);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 8px 8px 6px;
+            margin-top: 4px;
+        }
+
+        .nav-btn {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 10px;
             border: none;
-            color: white;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            display: inline-flex;
+            cursor: pointer;
+            display: flex;
             align-items: center;
-            gap: 5px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            gap: 10px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            text-align: left;
+            background: transparent;
+            color: rgba(148,163,184,0.85);
+            position: relative;
+            overflow: hidden;
         }
 
-        .admin-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        .nav-btn:hover {
+            background: rgba(46,109,164,0.15);
+            color: #e2e8f0;
+            transform: translateX(2px);
         }
 
-        .admin-btn:active {
-            transform: translateY(0);
+        .nav-btn-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            flex-shrink: 0;
+            transition: all 0.2s;
         }
 
-        .btn-pdf {
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        .nav-btn:hover .nav-btn-icon {
+            transform: scale(1.1);
         }
 
-        .btn-gpt {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-        }
+        .nav-btn-primary { background: rgba(30,58,92,0.6); }
+        .nav-btn-primary .nav-btn-icon { background: linear-gradient(135deg,#1B3A5C,#2E6DA4); }
+        .nav-btn-primary:hover { background: rgba(46,109,164,0.25) !important; }
 
-        .btn-mvm {
-            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
-        }
+        .nav-btn-success .nav-btn-icon { background: linear-gradient(135deg,#14532d,#16a34a); }
+        .nav-btn-success:hover { background: rgba(22,163,74,0.15) !important; }
 
-        .btn-painel {
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-        }
+        .nav-btn-gold .nav-btn-icon { background: linear-gradient(135deg,#78350f,#d97706); }
+        .nav-btn-gold:hover { background: rgba(217,119,6,0.15) !important; }
 
-        .btn-sair {
-            background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+        .nav-btn-purple .nav-btn-icon { background: linear-gradient(135deg,#4c1d95,#7c3aed); }
+        .nav-btn-purple:hover { background: rgba(124,58,237,0.15) !important; }
+
+        .nav-btn-slate .nav-btn-icon { background: linear-gradient(135deg,#1e293b,#475569); }
+        .nav-btn-slate:hover { background: rgba(71,85,105,0.2) !important; }
+
+        .nav-btn-danger .nav-btn-icon { background: linear-gradient(135deg,#7f1d1d,#dc2626); }
+        .nav-btn-danger:hover { background: rgba(220,38,38,0.15) !important; }
+
+        .nav-btn-label {
+            flex: 1;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.2px;
         }
 
         .pending-badge {
-            background: #fbbf24;
-            color: #78350f;
-            padding: 2px 5px;
-            border-radius: 6px;
+            background: linear-gradient(135deg,#f59e0b,#d97706);
+            color: #1c1917;
+            padding: 2px 6px;
+            border-radius: 10px;
             font-size: 9px;
-            margin-left: 3px;
             font-weight: 700;
-            min-width: 16px;
+            min-width: 18px;
             text-align: center;
         }
 
+        /* STATUS BADGE NO FUNDO DA SIDEBAR */
+        .sidebar-status {
+            padding: 12px 16px;
+            border-top: 1px solid rgba(46,109,164,0.2);
+            margin-top: auto;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            color: rgba(100,116,139,0.8);
+        }
+
+        .status-dot {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 6px #22c55e;
+            animation: pulse-dot 2s infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes pulse-dot {
+            0%,100% { opacity:1; transform:scale(1); }
+            50% { opacity:0.6; transform:scale(0.8); }
+        }
+
+        /* NOVO HEADER — apenas topo do chat */
+        .header {
+            display: none !important;
+        }
+
+        /* CHAT HEADER INTERNO */
+        .chat-header-bar {
+            background: linear-gradient(90deg, rgba(13,27,42,0.95) 0%, rgba(27,58,92,0.6) 100%);
+            border-bottom: 1px solid rgba(46,109,164,0.2);
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(10px);
+            flex-shrink: 0;
+        }
+
+        .chat-header-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(148,163,184,0.7);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .chat-header-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            color: rgba(100,116,139,0.6);
+        }
+
+        /* LAYOUT PRINCIPAL */
         .main-content {
             display: flex;
             flex: 1;
             overflow: hidden;
         }
 
-        .sidebar {
-            width: 200px;
-            background: #1e293b;
+        /* Ocultar sidebar antiga */
+        .sidebar-header { display: none; }
+
+        /* Manter estilos antigos funcionais para compatibilidade */
+        .admin-btn {
+            display: none !important;
+        }
+
+        .header-actions { display: none !important; }
+
+        .logo-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .sidebar-old-content { display: none !important; }
             border-right: 1px solid #334155;
             padding: 15px;
             overflow-y: auto;
@@ -1524,65 +1682,119 @@
     </script>
     
     <div class="container" id="mainSystem">
-        <div class="header">
-            <div class="header-left">
-                <div class="header-logos">
-                    <div class="logo-container" id="logo1Container" onclick="openLogoUpload(1)">
-                        <div class="logo-placeholder" id="logo1Placeholder">🛡️</div>
-                        <img id="logo1" style="display: none;">
-                    </div>
-                    <div class="logo-container" id="logo2Container" onclick="openLogoUpload(2)">
-                        <div class="logo-placeholder" id="logo2Placeholder">🔒</div>
-                        <img id="logo2" style="display: none;">
-                    </div>
-                </div>
-                <div class="header-info">
-                    <h1>SISTEMA DE INTELIGÊNCIA</h1>
-                    <p>Departamento de Segurança | Clube A Hebraica</p>
-                </div>
-            </div>
-            <div class="header-actions">
-                <button class="admin-btn btn-intel" onclick="gerarRelatorioCompleto()" style="background: linear-gradient(135deg, #0056b3 0%, #003d82 100%); font-weight: 600;">
-                    🔍 Agente de Inteligência
-                </button>
-                <button class="admin-btn" onclick="abrirEspecialista()" style="background: linear-gradient(135deg, #1a5c2e 0%, #0d3b1e 100%); font-weight: 600; color: white;">
-                    🛡️ Especialista de Segurança
-                </button>
-                <button class="admin-btn btn-pdf" onclick="exportToPDF()" style="background: linear-gradient(135deg, #d4af37 0%, #b8941f 100%); font-weight: 600;">
-                    📄 Gerar PDF
-                </button>
-                <button class="admin-btn btn-dados" onclick="openDados()" style="background: #059669;">
-                    📊 Dados
-                </button>
-                <button class="admin-btn btn-mvm" onclick="openMVM()">
-                    🌐 MVM
-                </button>
-                <button class="admin-btn btn-painel" onclick="openAdminPanel()">
-                    ⚙️ Painel
-                    <span class="pending-badge" id="pendingCount">0</span>
-                </button>
-                <button class="admin-btn btn-sair" onclick="logout()">
-                    🚪 Sair
-                </button>
-            </div>
-        </div>
-
+        <!-- NOVO LAYOUT: SIDEBAR LATERAL + CHAT -->
         <div class="main-content">
+
+            <!-- ═══ SIDEBAR LATERAL ═══ -->
             <div class="sidebar">
-                
-                <h3>📋 ACESSO RÁPIDO</h3>
-                <div class="quick-actions" id="quickActions">
-                    <!-- Será preenchido dinamicamente -->
+
+                <!-- BRAND -->
+                <div class="sidebar-brand">
+                    <div class="sidebar-brand-icon">🛡️</div>
+                    <div class="sidebar-brand-text">
+                        <h2>DOIC-8000</h2>
+                        <p>Inteligência em Segurança</p>
+                    </div>
                 </div>
+
+                <!-- LOGOS -->
+                <div class="sidebar-logos">
+                    <div class="logo-container" id="logo1Container" onclick="openLogoUpload(1)" title="Clique para trocar logo">
+                        <div class="logo-placeholder" id="logo1Placeholder">🏛️</div>
+                        <img id="logo1" style="display:none;">
+                    </div>
+                    <div class="logo-container" id="logo2Container" onclick="openLogoUpload(2)" title="Clique para trocar logo">
+                        <div class="logo-placeholder" id="logo2Placeholder">🔐</div>
+                        <img id="logo2" style="display:none;">
+                    </div>
+                    <div style="flex:1; padding-left:4px;">
+                        <div style="font-family:'Rajdhani',sans-serif; font-size:11px; font-weight:700; color:#94a3b8; letter-spacing:0.5px; line-height:1.4;">
+                            Clube A Hebraica<br>
+                            <span style="color:rgba(100,116,139,0.6); font-size:10px; font-weight:500;">Dep. de Segurança</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NAVEGAÇÃO -->
+                <div class="sidebar-nav">
+
+                    <div class="sidebar-section-label">Inteligência</div>
+
+                    <button class="nav-btn nav-btn-primary" onclick="gerarRelatorioCompleto()">
+                        <div class="nav-btn-icon">🔍</div>
+                        <span class="nav-btn-label">Agente de Inteligência</span>
+                    </button>
+
+                    <div class="sidebar-section-label">Planejamento</div>
+
+                    <button class="nav-btn nav-btn-success" onclick="abrirEspecialista()">
+                        <div class="nav-btn-icon">🛡️</div>
+                        <span class="nav-btn-label">Especialista de Segurança</span>
+                    </button>
+
+                    <button class="nav-btn nav-btn-gold" onclick="exportToPDF()">
+                        <div class="nav-btn-icon">📄</div>
+                        <span class="nav-btn-label">Gerar PDF do Chat</span>
+                    </button>
+
+                    <div class="sidebar-section-label">Sistema</div>
+
+                    <button class="nav-btn nav-btn-slate" onclick="openDados()">
+                        <div class="nav-btn-icon">📊</div>
+                        <span class="nav-btn-label">Base de Dados</span>
+                    </button>
+
+                    <button class="nav-btn nav-btn-purple" onclick="openMVM()">
+                        <div class="nav-btn-icon">🌐</div>
+                        <span class="nav-btn-label">MVM</span>
+                    </button>
+
+                    <button class="nav-btn nav-btn-slate" onclick="openAdminPanel()">
+                        <div class="nav-btn-icon">⚙️</div>
+                        <span class="nav-btn-label">Painel do Gestor</span>
+                        <span class="pending-badge" id="pendingCount">0</span>
+                    </button>
+
+                    <div class="sidebar-section-label">Conta</div>
+
+                    <button class="nav-btn nav-btn-danger" onclick="logout()">
+                        <div class="nav-btn-icon">🚪</div>
+                        <span class="nav-btn-label">Sair do Sistema</span>
+                    </button>
+
+                </div>
+
+                <!-- STATUS -->
+                <div class="sidebar-status">
+                    <div class="status-indicator">
+                        <div class="status-dot"></div>
+                        <span>Sistema operacional</span>
+                    </div>
+                    <div style="font-size:10px; color:rgba(100,116,139,0.5); margin-top:4px; padding-left:15px;">
+                        Protocolo DOIC-8000 ativo
+                    </div>
+                </div>
+
             </div>
+            <!-- ═══ FIM SIDEBAR ═══ -->
 
             <div class="chat-container">
+
+                <!-- MINI HEADER DO CHAT -->
+                <div class="chat-header-bar">
+                    <div class="chat-header-title">Terminal de Inteligência</div>
+                    <div class="chat-header-badge">
+                        <span style="color:#22c55e;">●</span>
+                        OSINT · Tempo Real · Protocolo DOIC-8000
+                    </div>
+                </div>
+
                 <div class="messages" id="messages">
                     <div class="welcome-message">
                         <div class="welcome-logo">🛡️</div>
-                        <h2 style="color: #e2e8f0;">🛡️ Sistema de Inteligência em Segurança</h2>
-                        <p style="color: #94a3b8;"><strong>Departamento de Segurança | Clube A Hebraica</strong></p>
-                        <p style="margin-top: 15px; color: #cbd5e1;">Plataforma de análise e monitoramento de ameaças em tempo real. Consulte relatórios, procedimentos e análises de inteligência.</p>
+                        <h2 style="color: #e2e8f0;">Sistema de Inteligência em Segurança</h2>
+                        <p style="color: #94a3b8;"><strong>Departamento de Segurança · Clube A Hebraica · Protocolo DOIC-8000</strong></p>
+                        <p style="margin-top: 15px; color: #cbd5e1;">Plataforma de análise e monitoramento de ameaças em tempo real. Use o menu lateral para gerar relatórios, acionar o Especialista de Segurança ou consultar procedimentos.</p>
                     </div>
                 </div>
 
