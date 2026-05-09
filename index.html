@@ -3,194 +3,331 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Sistema Hebraica Segurança</title>
+    <title>DOIC-8000 — Acesso Restrito</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin:0; padding:0; box-sizing:border-box; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', sans-serif;
+            background: #060d18;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-        }
-
-        .login-container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             overflow: hidden;
-            max-width: 400px;
+            position: relative;
+        }
+
+        /* FUNDO COM EFEITO */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 20% 20%, rgba(13,42,92,0.45) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 50% at 80% 80%, rgba(8,25,55,0.4) 0%, transparent 60%),
+                radial-gradient(ellipse 40% 40% at 50% 50%, rgba(46,109,164,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 60px,
+                rgba(46,109,164,0.04) 60px,
+                rgba(46,109,164,0.04) 61px
+            ),
+            repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 60px,
+                rgba(46,109,164,0.02) 60px,
+                rgba(46,109,164,0.02) 61px
+            );
+            pointer-events: none;
+        }
+
+        /* CARD DE LOGIN */
+        .card {
+            position: relative;
+            z-index: 10;
             width: 100%;
-            animation: slideUp 0.5s ease-out;
+            max-width: 420px;
+            margin: 20px;
+            animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) both;
         }
 
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        @keyframes fadeUp {
+            from { opacity:0; transform:translateY(24px); }
+            to   { opacity:1; transform:translateY(0); }
         }
 
-        .login-header {
-            background: linear-gradient(135deg, #00A8E1 0%, #0080B8 100%);
-            padding: 40px 30px;
+        /* HEADER DO CARD */
+        .card-header {
+            background: linear-gradient(180deg, #0d1b2a 0%, #0a1628 100%);
+            border: 1px solid rgba(46,109,164,0.25);
+            border-bottom: none;
+            border-radius: 16px 16px 0 0;
+            padding: 36px 36px 28px;
             text-align: center;
-            color: white;
+            position: relative;
+            overflow: hidden;
         }
 
-        .logo-container {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 20px;
-            background: white;
-            border-radius: 20px;
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(100,160,220,0.5), transparent);
+        }
+
+        /* ESCUDO */
+        .shield-wrap {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 18px;
+            background: linear-gradient(135deg, #1B3A5C, #2E6DA4);
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            font-size: 32px;
+            box-shadow: 0 8px 32px rgba(46,109,164,0.4), 0 0 0 1px rgba(46,109,164,0.3);
+            animation: glow 3s ease-in-out infinite;
         }
 
-        .logo-text {
-            font-size: 48px;
+        @keyframes glow {
+            0%,100% { box-shadow: 0 8px 32px rgba(46,109,164,0.4), 0 0 0 1px rgba(46,109,164,0.3); }
+            50%      { box-shadow: 0 8px 40px rgba(46,109,164,0.65), 0 0 0 1px rgba(46,109,164,0.5); }
+        }
+
+        /* LOGOS */
+        .logo-row {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .logo-slot {
+            width: 48px;
+            height: 48px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: rgba(148,163,184,0.5);
+        }
+
+        .card-header h1 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 22px;
             font-weight: 700;
-            color: #00A8E1;
-            letter-spacing: -2px;
+            color: #e2e8f0;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
         }
 
-        .login-header h1 {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 8px;
+        .card-header .subtitle {
+            font-size: 12px;
+            color: rgba(148,163,184,0.6);
+            letter-spacing: 1px;
         }
 
-        .login-header p {
-            font-size: 14px;
-            opacity: 0.95;
+        .badge-protocolo {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 12px;
+            background: rgba(46,109,164,0.12);
+            border: 1px solid rgba(46,109,164,0.25);
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 10px;
+            color: rgba(100,160,220,0.8);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
         }
 
-        .login-body {
-            padding: 40px 30px;
+        .badge-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 6px #22c55e;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%,100% { opacity:1; }
+            50%      { opacity:0.5; }
+        }
+
+        /* BODY DO CARD */
+        .card-body {
+            background: #0d1b2a;
+            border: 1px solid rgba(46,109,164,0.25);
+            border-top: none;
+            border-radius: 0 0 16px 16px;
+            padding: 32px 36px 28px;
         }
 
         .form-group {
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-size: 14px;
-            font-weight: 500;
-            color: #374151;
+            font-size: 11px;
+            font-weight: 600;
+            color: rgba(100,116,139,0.9);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
         }
 
         .form-group input {
             width: 100%;
-            padding: 14px 16px;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            font-size: 15px;
-            transition: all 0.3s ease;
+            padding: 13px 16px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(46,109,164,0.25);
+            border-radius: 10px;
+            font-size: 14px;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.25s ease;
+        }
+
+        .form-group input::placeholder {
+            color: rgba(100,116,139,0.5);
         }
 
         .form-group input:focus {
             outline: none;
-            border-color: #00A8E1;
-            box-shadow: 0 0 0 3px rgba(0, 168, 225, 0.1);
+            border-color: rgba(46,109,164,0.6);
+            background: rgba(46,109,164,0.08);
+            box-shadow: 0 0 0 3px rgba(46,109,164,0.1);
         }
 
         .btn-login {
             width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #00A8E1 0%, #0080B8 100%);
+            padding: 14px;
+            background: linear-gradient(135deg, #1B3A5C 0%, #2E6DA4 100%);
             color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
+            border: 1px solid rgba(46,109,164,0.4);
+            border-radius: 10px;
+            font-size: 13px;
             font-weight: 600;
+            font-family: 'Rajdhani', sans-serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 168, 225, 0.3);
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 16px rgba(46,109,164,0.25);
+            margin-top: 4px;
         }
 
         .btn-login:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 168, 225, 0.4);
+            box-shadow: 0 8px 28px rgba(46,109,164,0.4);
+            filter: brightness(1.1);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
         }
 
         .error-message {
-            background: #FEE2E2;
-            color: #DC2626;
-            padding: 12px 16px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            font-size: 14px;
+            background: rgba(220,38,38,0.1);
+            border: 1px solid rgba(220,38,38,0.3);
+            color: #fca5a5;
+            padding: 10px 14px;
+            border-radius: 8px;
+            margin-bottom: 18px;
+            font-size: 13px;
             display: none;
+            text-align: center;
         }
 
-        .login-footer {
+        .card-footer {
             text-align: center;
-            padding: 20px;
-            background: #f9fafb;
-            border-top: 1px solid #e5e7eb;
-            font-size: 13px;
-            color: #6b7280;
+            padding-top: 20px;
+            font-size: 11px;
+            color: rgba(100,116,139,0.4);
+            letter-spacing: 0.5px;
         }
+
+        /* DECORAÇÃO LATERAL */
+        .deco-line {
+            position: fixed;
+            top: 0; bottom: 0;
+            width: 1px;
+            background: linear-gradient(180deg, transparent 0%, rgba(46,109,164,0.3) 30%, rgba(46,109,164,0.15) 70%, transparent 100%);
+        }
+        .deco-line-left  { left: 10%; }
+        .deco-line-right { right: 10%; }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <div class="login-header">
-            <div class="logo-container">
-                <div class="logo-text">H</div>
+    <div class="deco-line deco-line-left"></div>
+    <div class="deco-line deco-line-right"></div>
+
+    <div class="card">
+        <div class="card-header">
+            <div class="shield-wrap">🛡️</div>
+
+            <div class="logo-row">
+                <div class="logo-slot">🏛️</div>
+                <div class="logo-slot">🔐</div>
             </div>
+
             <h1>Sistema de Inteligência</h1>
-            <p>Departamento de Segurança</p>
+            <div class="subtitle">Clube A Hebraica · Departamento de Segurança</div>
+
+            <div class="badge-protocolo">
+                <div class="badge-dot"></div>
+                Protocolo DOIC-8000 · Acesso Restrito
+            </div>
         </div>
 
-        <div class="login-body">
+        <div class="card-body">
             <div class="error-message" id="errorMessage">
-                Credenciais inválidas
+                ⚠️ Credenciais inválidas. Tente novamente.
             </div>
 
             <form id="loginForm">
                 <div class="form-group">
                     <label>E-mail</label>
-                    <input type="email" id="email" placeholder="seu@email.com" required>
+                    <input type="email" id="email" placeholder="seu@email.com.br" required autocomplete="email">
                 </div>
-
                 <div class="form-group">
                     <label>Senha</label>
-                    <input type="password" id="password" placeholder="••••••••" required>
+                    <input type="password" id="password" placeholder="••••••••••••" required autocomplete="current-password">
                 </div>
-
-                <button type="submit" class="btn-login">Entrar no Sistema</button>
+                <button type="submit" class="btn-login">Acessar o Sistema</button>
             </form>
-        </div>
 
-        <div class="login-footer">
-            © 2026 Clube A Hebraica
+            <div class="card-footer">
+                © 2026 Clube A Hebraica · Uso interno restrito
+            </div>
         </div>
     </div>
 
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            const email = document.getElementById('email').value;
+            const email    = document.getElementById('email').value;
             const password = document.getElementById('password').value;
-
             if (email === 'admin@hebraica.com.br' && password === 'Hebraica@2026') {
                 sessionStorage.setItem('hebraica_auth', 'true');
                 sessionStorage.setItem('hebraica_user', email);
@@ -199,7 +336,6 @@
                 document.getElementById('errorMessage').style.display = 'block';
             }
         });
-
         if (sessionStorage.getItem('hebraica_auth') === 'true') {
             window.location.href = 'sistema.html';
         }
