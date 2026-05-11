@@ -1565,26 +1565,22 @@
                     </div>
                 </div>
                 <div class="header-info">
-                    <h1>SISTEMA DE INTELIGÊNCIA</h1>
+                    <h1 style="text-align:center;">SISTEMA DE INTELIGÊNCIA</h1>
                     <p>Departamento de Segurança | Clube A Hebraica</p>
                 </div>
             </div>
             <div class="header-actions">
-                <button class="admin-btn btn-intel" onclick="gerarRelatorioCompleto()" style="background: linear-gradient(135deg, #0056b3 0%, #003d82 100%); font-weight: 600;">
+                <button class="admin-btn btn-intel" onclick="gerarRelatorioCompleto()" style="background: linear-gradient(135deg, #1B3A5C 0%, #2E6DA4 100%); font-weight: 600;">
                     🔍 Agente de Inteligência
                 </button>
-                <button class="admin-btn" onclick="abrirEspecialista()" style="background: linear-gradient(135deg, #1a5c2e 0%, #0d3b1e 100%); font-weight: 600; color: white;">
+                <button class="admin-btn" onclick="abrirEspecialista()" style="background: linear-gradient(135deg, #1B3A5C 0%, #2E6DA4 100%); font-weight: 600;">
                     🛡️ Especialista de Segurança
                 </button>
-                <button class="admin-btn btn-pdf" onclick="exportToPDF()" style="background: linear-gradient(135deg, #d4af37 0%, #b8941f 100%); font-weight: 600;">
-                    📄 Gerar PDF
-                </button>
-                <button class="admin-btn btn-dados" onclick="openDados()" style="background: #059669;">
+
+                <button class="admin-btn btn-dados" onclick="openDados()" style="background: linear-gradient(135deg, #1B3A5C 0%, #2E6DA4 100%);">
                     📊 Dados
                 </button>
-                <button class="admin-btn btn-mvm" onclick="openMVM()">
-                    🌐 MVM
-                </button>
+
                 <button class="admin-btn btn-painel" onclick="openAdminPanel()">
                     ⚙️ Painel
                     <span class="pending-badge" id="pendingCount">0</span>
@@ -1597,11 +1593,59 @@
 
         <div class="main-content">
             <div class="sidebar">
-                
-                <h3>📋 ACESSO RÁPIDO</h3>
-                <div class="quick-actions" id="quickActions">
-                    <!-- Será preenchido dinamicamente -->
+
+                <!-- LOGOS INSERÍVEIS -->
+                <div style="display:flex; gap:8px; padding:14px 14px 10px; border-bottom:1px solid rgba(46,109,164,0.15);">
+                    <div onclick="abrirUploadLogo('logo1')" title="Clique para inserir logo" style="width:44px;height:44px;background:rgba(255,255,255,0.05);border:1px dashed rgba(46,109,164,0.3);border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;transition:all 0.2s;" onmouseover="this.style.background='rgba(46,109,164,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">
+                        <img id="logo1Img" src="" style="display:none;width:100%;height:100%;object-fit:contain;border-radius:6px;">
+                        <span id="logo1Ph" style="font-size:18px;color:rgba(148,163,184,0.4);">🏛️</span>
+                    </div>
+                    <div onclick="abrirUploadLogo('logo2')" title="Clique para inserir logo" style="width:44px;height:44px;background:rgba(255,255,255,0.05);border:1px dashed rgba(46,109,164,0.3);border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;transition:all 0.2s;" onmouseover="this.style.background='rgba(46,109,164,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">
+                        <img id="logo2Img" src="" style="display:none;width:100%;height:100%;object-fit:contain;border-radius:6px;">
+                        <span id="logo2Ph" style="font-size:18px;color:rgba(148,163,184,0.4);">🔐</span>
+                    </div>
+                    <div style="flex:1;display:flex;align-items:center;padding-left:6px;">
+                        <div style="font-size:10px;color:rgba(100,116,139,0.6);line-height:1.4;">Clube A Hebraica<br><span style="font-size:9px;opacity:0.7;">Dep. Segurança</span></div>
+                    </div>
                 </div>
+                <input type="file" id="logoUploadInput" accept="image/*" style="display:none;" onchange="receberLogo(this)">
+
+                <!-- BOTÕES DE NAVEGAÇÃO -->
+                <div style="padding:12px 10px; display:flex; flex-direction:column; gap:3px; flex:1;">
+
+                    <div style="font-size:9px;font-weight:700;color:rgba(100,116,139,0.6);letter-spacing:2px;text-transform:uppercase;padding:8px 6px 4px;">Inteligência</div>
+
+                    <button onclick="gerarRelatorioCompleto()" style="width:100%;padding:9px 12px;border-radius:8px;border:none;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:12px;font-weight:600;background:rgba(30,58,92,0.7);color:#93c5fd;text-align:left;transition:all 0.2s;" onmouseover="this.style.background='rgba(46,109,164,0.25)'" onmouseout="this.style.background='rgba(30,58,92,0.7)'">
+                        <span style="font-size:16px;">🔍</span> Agente de Inteligência
+                    </button>
+
+                    <div style="font-size:9px;font-weight:700;color:rgba(100,116,139,0.6);letter-spacing:2px;text-transform:uppercase;padding:8px 6px 4px;">Planejamento</div>
+
+                    <button onclick="abrirEspecialista()" style="width:100%;padding:9px 12px;border-radius:8px;border:none;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:12px;font-weight:600;background:rgba(30,58,92,0.7);color:#93c5fd;text-align:left;transition:all 0.2s;" onmouseover="this.style.background='rgba(46,109,164,0.25)'" onmouseout="this.style.background='rgba(30,58,92,0.7)'">
+                        <span style="font-size:16px;">🛡️</span> Especialista de Segurança
+                    </button>
+
+                    <div style="font-size:9px;font-weight:700;color:rgba(100,116,139,0.6);letter-spacing:2px;text-transform:uppercase;padding:8px 6px 4px;">Sistema</div>
+
+                    <button onclick="openDados()" style="width:100%;padding:9px 12px;border-radius:8px;border:none;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:12px;font-weight:600;background:rgba(30,58,92,0.7);color:#93c5fd;text-align:left;transition:all 0.2s;" onmouseover="this.style.background='rgba(46,109,164,0.25)'" onmouseout="this.style.background='rgba(30,58,92,0.7)'">
+                        <span style="font-size:16px;">📊</span> Base de Dados
+                    </button>
+
+                    <button onclick="openAdminPanel()" style="width:100%;padding:9px 12px;border-radius:8px;border:none;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:12px;font-weight:600;background:rgba(30,58,92,0.7);color:#93c5fd;text-align:left;transition:all 0.2s;" onmouseover="this.style.background='rgba(46,109,164,0.25)'" onmouseout="this.style.background='rgba(30,58,92,0.7)'">
+                        <span style="font-size:16px;">⚙️</span> Painel do Gestor
+                        <span id="pendingCount" style="display:none;background:#f59e0b;color:#1c1917;padding:1px 5px;border-radius:8px;font-size:9px;font-weight:700;margin-left:auto;">0</span>
+                    </button>
+
+                </div>
+
+                <!-- STATUS -->
+                <div style="padding:10px 14px;border-top:1px solid rgba(46,109,164,0.15);">
+                    <div style="display:flex;align-items:center;gap:7px;font-size:10px;color:rgba(100,116,139,0.7);">
+                        <div style="width:6px;height:6px;border-radius:50%;background:#22c55e;box-shadow:0 0 5px #22c55e;animation:pulse 2s infinite;flex-shrink:0;"></div>
+                        Protocolo DOIC-8000 ativo
+                    </div>
+                </div>
+
             </div>
 
             <div class="chat-container">
@@ -9581,17 +9625,19 @@ async function gerarPDFComJsPDF(result) {
     <!-- Formulário -->
     <div style="padding:24px; background:#f8fafc;">
 
-      <!-- Identificação do Evento -->
-      <div style="background:white; border-radius:10px; padding:18px; margin-bottom:16px; border:1px solid #e2e8f0;">
-        <div style="font-size:11px; font-weight:700; color:#64748b; letter-spacing:1px; margin-bottom:12px;">IDENTIFICAÇÃO DO EVENTO</div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+      <!-- SEÇÃO 1: IDENTIFICAÇÃO DO EVENTO -->
+      <div style="background:white;border-radius:10px;padding:16px;margin-bottom:12px;border:1px solid #e2e8f0;">
+        <div style="font-size:10px;font-weight:700;color:#64748b;letter-spacing:1.5px;margin-bottom:12px;text-transform:uppercase;">📋 Identificação do Evento</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+
           <div style="grid-column:1/-1;">
-            <label style="font-size:12px; font-weight:600; color:#374151; display:block; margin-bottom:4px;">Nome do evento *</label>
-            <input id="esp_nome" type="text" placeholder="Ex: Formatura Colégio Hebraica 2024" style="width:100%; padding:8px 12px; border:1px solid #d1d5db; border-radius:6px; font-size:13px; box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Nome do Evento *</label>
+            <input id="esp_nome" type="text" placeholder="Ex: Formatura Colégio Hebraica 2026" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
           </div>
+
           <div>
-            <label style="font-size:12px; font-weight:600; color:#374151; display:block; margin-bottom:4px;">Tipo do evento *</label>
-            <select id="esp_tipo" style="width:100%; padding:8px 12px; border:1px solid #d1d5db; border-radius:6px; font-size:13px; box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Tipo de Evento *</label>
+            <select id="esp_tipo" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
               <option value="">Selecione...</option>
               <option>Formatura / Cerimônia</option>
               <option>Evento Esportivo</option>
@@ -9603,94 +9649,173 @@ async function gerarPDFComJsPDF(result) {
               <option>Outro</option>
             </select>
           </div>
+
           <div>
-            <label style="font-size:12px; font-weight:600; color:#374151; display:block; margin-bottom:4px;">Data *</label>
-            <input id="esp_data" type="date" style="width:100%; padding:8px 12px; border:1px solid #d1d5db; border-radius:6px; font-size:13px; box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Modelo do Evento</label>
+            <select id="esp_modelo" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+              <option value="">Selecione...</option>
+              <option>Aberto ao público</option>
+              <option>Fechado — convidados</option>
+              <option>Misto — sócios + convidados</option>
+              <option>Interno — somente sócios</option>
+              <option>Corporativo — empresa</option>
+            </select>
           </div>
+
           <div>
-            <label style="font-size:12px; font-weight:600; color:#374151; display:block; margin-bottom:4px;">Início</label>
-            <input id="esp_horario" type="time" style="width:100%; padding:8px 12px; border:1px solid #d1d5db; border-radius:6px; font-size:13px; box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Data de Início *</label>
+            <input id="esp_data" type="date" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
           </div>
+
           <div>
-            <label style="font-size:12px; font-weight:600; color:#374151; display:block; margin-bottom:4px;">Término</label>
-            <input id="esp_termino" type="time" style="width:100%; padding:8px 12px; border:1px solid #d1d5db; border-radius:6px; font-size:13px; box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Data de Término</label>
+            <input id="esp_data_fim" type="date" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
           </div>
+
           <div>
-            <label style="font-size:12px; font-weight:600; color:#374151; display:block; margin-bottom:4px;">Local dentro da Hebraica</label>
-            <input id="esp_local" type="text" placeholder="Ex: Salão Nobre, Quadra Principal" style="width:100%; padding:8px 12px; border:1px solid #d1d5db; border-radius:6px; font-size:13px; box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Início (hora) *</label>
+            <input id="esp_horario" type="time" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
           </div>
+
           <div>
-            <label style="font-size:12px; font-weight:600; color:#374151; display:block; margin-bottom:4px;">Público estimado *</label>
-            <input id="esp_publico" type="number" placeholder="Ex: 300 pessoas" style="width:100%; padding:8px 12px; border:1px solid #d1d5db; border-radius:6px; font-size:13px; box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Término (hora)</label>
+            <input id="esp_termino" type="time" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
           </div>
+
           <div>
-            <label style="font-size:12px; font-weight:600; color:#374151; display:block; margin-bottom:4px;">Perfil do público *</label>
-            <input id="esp_perfil" type="text" placeholder="Ex: Famílias, jovens, idosos" style="width:100%; padding:8px 12px; border:1px solid #d1d5db; border-radius:6px; font-size:13px; box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Dias de Evento</label>
+            <input id="esp_dias_evento" type="number" min="1" placeholder="Ex: 1" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
           </div>
+
+          <div>
+            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Horas Evento (h)</label>
+            <input id="esp_horas_evento" type="number" min="1" placeholder="Ex: 6" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+          </div>
+
+          <div>
+            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Público *</label>
+            <input id="esp_publico" type="number" min="1" placeholder="Ex: 300" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+          </div>
+
+          <div>
+            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Público Externo?</label>
+            <select id="esp_publico_externo" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+              <option value="Não">Não</option>
+              <option value="Sim">Sim</option>
+            </select>
+          </div>
+
+          <div>
+            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Acesso ao Clube Posteriormente?</label>
+            <select id="esp_acesso_posterior" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+              <option value="Não">Não</option>
+              <option value="Sim">Sim</option>
+            </select>
+          </div>
+
         </div>
       </div>
 
-      <!-- Detalhes Operacionais -->
-      <div style="background:white; border-radius:10px; padding:18px; margin-bottom:16px; border:1px solid #e2e8f0;">
-        <div style="font-size:11px; font-weight:700; color:#64748b; letter-spacing:1px; margin-bottom:12px;">DETALHES OPERACIONAIS</div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+      <!-- SEÇÃO 2: ESPAÇO E MONTAGEM -->
+      <div style="background:white;border-radius:10px;padding:16px;margin-bottom:12px;border:1px solid #e2e8f0;">
+        <div style="font-size:10px;font-weight:700;color:#64748b;letter-spacing:1.5px;margin-bottom:12px;text-transform:uppercase;">📍 Espaço e Montagem</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+
           <div style="grid-column:1/-1;">
-            <label style="font-size:12px; font-weight:600; color:#374151; display:block; margin-bottom:4px;">Objetivo do evento</label>
-            <input id="esp_objetivo" type="text" placeholder="Ex: Cerimônia de formatura do ensino médio" style="width:100%; padding:8px 12px; border:1px solid #d1d5db; border-radius:6px; font-size:13px; box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Espaço a ser utilizado *</label>
+            <select id="esp_local" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;" onchange="verificarEspacoTotal(this.value)">
+              <option value="">Selecione o espaço...</option>
+              <option value="Marc Chagall">Marc Chagall</option>
+              <option value="Teatro Anne Frank">Teatro Anne Frank</option>
+              <option value="Teatro Arthur Rubinstein">Teatro Arthur Rubinstein</option>
+              <option value="Mitzpe">Mitzpe</option>
+              <option value="Adolfo Block">Adolfo Block</option>
+              <option value="Sinagoga">Sinagoga</option>
+              <option value="Centro Cívico">Centro Cívico</option>
+              <option value="Clube inteiro">Clube inteiro</option>
+            </select>
+            <div id="aviso_espaco_total" style="display:none;margin-top:6px;padding:8px 10px;background:#fef3c7;border:1px solid #f59e0b;border-radius:6px;font-size:11px;color:#92400e;">
+              ⚠️ Para uso do Clube inteiro ou Centro Cívico, os valores de orçamento serão definidos posteriormente após análise detalhada.
+            </div>
           </div>
+
           <div>
-            <label style="font-size:12px; font-weight:600; color:#374151; display:block; margin-bottom:4px;">Duração total</label>
-            <input id="esp_duracao" type="text" placeholder="Ex: 4 horas, Das 19h às 23h" style="width:100%; padding:8px 12px; border:1px solid #d1d5db; border-radius:6px; font-size:13px; box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Dias de Montagem</label>
+            <input id="esp_dias_montagem" type="number" min="0" placeholder="Ex: 1" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
           </div>
+
           <div>
-            <label style="font-size:12px; font-weight:600; color:#374151; display:block; margin-bottom:4px;">Montagem</label>
-            <input id="esp_montagem" type="text" placeholder="Ex: Dia anterior a partir das 14h" style="width:100%; padding:8px 12px; border:1px solid #d1d5db; border-radius:6px; font-size:13px; box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Duração da Montagem (h)</label>
+            <input id="esp_horas_montagem" type="number" min="0" placeholder="Ex: 4" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
           </div>
+
           <div>
-            <label style="font-size:12px; font-weight:600; color:#374151; display:block; margin-bottom:4px;">Famílias / crianças</label>
-            <select id="esp_familias" style="width:100%; padding:8px 12px; border:1px solid #d1d5db; border-radius:6px; font-size:13px; box-sizing:border-box;">
-              <option value="Não informado">Não informado</option>
-              <option value="Sim — presença significativa">Sim — presença significativa</option>
-              <option value="Sim — presença moderada">Sim — presença moderada</option>
-              <option value="Não">Não</option>
+            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Jornada Vigilante — Montagem</label>
+            <select id="esp_horas_vig_montagem" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+              <option value="8">8 horas — R$ 344,50/vig</option>
+              <option value="6">6 horas — R$ 261,00/vig</option>
+              <option value="12">12 horas — R$ 518,00/vig</option>
             </select>
           </div>
+
           <div>
-            <label style="font-size:12px; font-weight:600; color:#374151; display:block; margin-bottom:4px;">Autoridades / VIPs</label>
-            <select id="esp_vips" style="width:100%; padding:8px 12px; border:1px solid #d1d5db; border-radius:6px; font-size:13px; box-sizing:border-box;">
-              <option value="Não">Não</option>
-              <option value="Sim — autoridades locais">Sim — autoridades locais</option>
-              <option value="Sim — autoridades estaduais">Sim — autoridades estaduais</option>
-              <option value="Sim — lideranças comunitárias">Sim — lideranças comunitárias</option>
+            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Dia de Desmontagem</label>
+            <input id="esp_data_desmontagem" type="date" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+          </div>
+
+          <div>
+            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Duração da Desmontagem (h)</label>
+            <input id="esp_horas_desmontagem" type="number" min="0" placeholder="Ex: 3" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+          </div>
+
+          <div>
+            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Jornada Vigilante — Desmontagem</label>
+            <select id="esp_horas_vig_desmontagem" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+              <option value="6">6 horas — R$ 261,00/vig</option>
+              <option value="8">8 horas — R$ 344,50/vig</option>
+              <option value="12">12 horas — R$ 518,00/vig</option>
             </select>
           </div>
+
+          <div style="grid-column:1/-1;">
+            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Jornada Vigilante — Evento</label>
+            <select id="esp_horas_vig_evento" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+              <option value="12">12 horas — R$ 518,00/vig</option>
+              <option value="8">8 horas — R$ 344,50/vig</option>
+              <option value="6">6 horas — R$ 261,00/vig</option>
+            </select>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SEÇÃO 3: SEGURANÇA -->
+      <div style="background:white;border-radius:10px;padding:16px;margin-bottom:12px;border:1px solid #e2e8f0;">
+        <div style="font-size:10px;font-weight:700;color:#64748b;letter-spacing:1.5px;margin-bottom:12px;text-transform:uppercase;">🛡️ Contexto de Segurança</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+
           <div>
-            <label style="font-size:12px; font-weight:600; color:#374151; display:block; margin-bottom:4px;">Apoio médico</label>
-            <select id="esp_medico" style="width:100%; padding:8px 12px; border:1px solid #d1d5db; border-radius:6px; font-size:13px; box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Apoio Médico</label>
+            <select id="esp_medico" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
               <option value="Não informado">Não informado</option>
               <option value="Sim — paramédico">Sim — paramédico</option>
               <option value="Sim — técnico de enfermagem">Sim — técnico de enfermagem</option>
               <option value="Não — lacuna identificada">Não — lacuna identificada</option>
             </select>
           </div>
-          <div style="grid-column:1/-1;">
-            <label style="font-size:12px; font-weight:600; color:#374151; display:block; margin-bottom:4px;">Áreas restritas</label>
-            <input id="esp_areas" type="text" placeholder="Ex: Bastidores, sala de coordenação, área técnica" style="width:100%; padding:8px 12px; border:1px solid #d1d5db; border-radius:6px; font-size:13px; box-sizing:border-box;">
-          </div>
-        </div>
-      </div>
 
-      <!-- Contexto e Restrições -->
-      <div style="background:white; border-radius:10px; padding:18px; margin-bottom:16px; border:1px solid #e2e8f0;">
-        <div style="font-size:11px; font-weight:700; color:#64748b; letter-spacing:1px; margin-bottom:12px;">CONTEXTO E RESTRIÇÕES</div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
           <div>
-            <label style="font-size:12px; font-weight:600; color:#374151; display:block; margin-bottom:4px;">Contexto externo / data judaica</label>
-            <input id="esp_contexto" type="text" placeholder="Ex: Véspera de Yom Kipur" style="width:100%; padding:8px 12px; border:1px solid #d1d5db; border-radius:6px; font-size:13px; box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Apoio Policial</label>
+            <select id="esp_policial" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+              <option value="Não">Não</option>
+              <option value="Sim — PMESP solicitada">Sim — PMESP solicitada</option>
+              <option value="Sim — PMESP confirmada">Sim — PMESP confirmada</option>
+            </select>
           </div>
+
           <div>
-            <label style="font-size:12px; font-weight:600; color:#374151; display:block; margin-bottom:4px;">Sensibilidade institucional</label>
-            <select id="esp_sensibilidade" style="width:100%; padding:8px 12px; border:1px solid #d1d5db; border-radius:6px; font-size:13px; box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Sensibilidade Institucional</label>
+            <select id="esp_sensibilidade" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
               <option value="Não informado">Não informado</option>
               <option value="Alta — presença de imprensa">Alta — presença de imprensa</option>
               <option value="Alta — evento simbólico">Alta — evento simbólico</option>
@@ -9698,34 +9823,51 @@ async function gerarPDFComJsPDF(result) {
               <option value="Baixa">Baixa</option>
             </select>
           </div>
+
           <div>
-            <label style="font-size:12px; font-weight:600; color:#374151; display:block; margin-bottom:4px;">Recursos humanos disponíveis</label>
-            <input id="esp_recursos" type="text" placeholder="Ex: 5 vigilantes próprios + portaria" style="width:100%; padding:8px 12px; border:1px solid #d1d5db; border-radius:6px; font-size:13px; box-sizing:border-box;" value="Torniquetes, controle facial e biométrico, portal detector de metais, raio X, 5 vigilantes armados">
-          </div>
-          <div>
-            <label style="font-size:12px; font-weight:600; color:#374151; display:block; margin-bottom:4px;">Apoio policial</label>
-            <select id="esp_policial" style="width:100%; padding:8px 12px; border:1px solid #d1d5db; border-radius:6px; font-size:13px; box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Autoridades / VIPs</label>
+            <select id="esp_vips" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
               <option value="Não">Não</option>
-              <option value="Sim — PMESP solicitada">Sim — PMESP solicitada</option>
-              <option value="Sim — PMESP confirmada">Sim — PMESP confirmada</option>
+              <option value="Sim — autoridades locais">Sim — autoridades locais</option>
+              <option value="Sim — autoridades estaduais">Sim — autoridades estaduais</option>
+              <option value="Sim — lideranças comunitárias">Sim — lideranças comunitárias</option>
             </select>
           </div>
-          <div>
-            <label style="font-size:12px; font-weight:600; color:#374151; display:block; margin-bottom:4px;">Recursos próprios do clube</label>
-            <input id="esp_proprios" type="text" placeholder="Ex: Câmeras CFTV, controle de acesso biométrico" style="width:100%; padding:8px 12px; border:1px solid #d1d5db; border-radius:6px; font-size:13px; box-sizing:border-box;">
-          </div>
-          <div>
-            <label style="font-size:12px; font-weight:600; color:#374151; display:block; margin-bottom:4px;">Restrições orçamentárias</label>
-            <input id="esp_orcamento_max" type="text" placeholder="Ex: Orçamento até R$ 5.000" style="width:100%; padding:8px 12px; border:1px solid #d1d5db; border-radius:6px; font-size:13px; box-sizing:border-box;">
-          </div>
+
           <div style="grid-column:1/-1;">
-            <label style="font-size:12px; font-weight:600; color:#374151; display:block; margin-bottom:4px;">Informações adicionais</label>
-            <textarea id="esp_adicional" rows="3" placeholder="Qualquer contexto relevante..." style="width:100%; padding:8px 12px; border:1px solid #d1d5db; border-radius:6px; font-size:13px; box-sizing:border-box; resize:vertical;"></textarea>
+            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Informações adicionais</label>
+            <textarea id="esp_adicional" rows="2" placeholder="Contexto relevante, observações especiais..." style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;resize:vertical;"></textarea>
           </div>
+
         </div>
       </div>
 
+      <!-- CAMPOS OCULTOS para compatibilidade -->
+      <div style="display:none;">
+        <input id="esp_perfil" value="Público geral">
+        <input id="esp_familias" value="Não informado">
+        <input id="esp_recursos" value="Torniquetes, controle facial e biométrico, portal detector de metais, raio X, 5 vigilantes armados">
+        <input id="esp_proprios" value="">
+        <input id="esp_orcamento_max" value="">
+        <input id="esp_objetivo" value="">
+        <input id="esp_areas" value="">
+        <input id="esp_contexto" value="">
+        <input id="esp_duracao" value="">
+        <input id="esp_montagem" value="">
+      </div>
+
       <!-- Botão -->
+      <script>
+        function verificarEspacoTotal(val) {
+            const aviso = document.getElementById('aviso_espaco_total');
+            if (val === 'Clube inteiro' || val === 'Centro Cívico') {
+                aviso.style.display = 'block';
+            } else {
+                aviso.style.display = 'none';
+            }
+        }
+      </script>
+
       <button onclick="gerarEspecialista()" id="btnGerarEspecialista" style="width:100%; padding:14px; background:linear-gradient(135deg,#0D1B2A 0%,#1B3A5C 100%); color:white; border:none; border-radius:8px; font-size:14px; font-weight:700; cursor:pointer; letter-spacing:0.5px;">
         🛡️ Gerar Planejamento de Segurança
       </button>
@@ -9735,6 +9877,36 @@ async function gerarPDFComJsPDF(result) {
 </div>
 
 <script>
+// ── LOGOS DA SIDEBAR ──────────────────────────────────────────────────────
+        let _logoAlvo = 'logo1';
+        function abrirUploadLogo(qual) {
+            _logoAlvo = qual;
+            document.getElementById('logoUploadInput').click();
+        }
+        function receberLogo(input) {
+            if (!input.files || !input.files[0]) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const data = e.target.result;
+                const img = document.getElementById(_logoAlvo + 'Img');
+                const ph  = document.getElementById(_logoAlvo + 'Ph');
+                if (img) { img.src = data; img.style.display = 'block'; }
+                if (ph)  { ph.style.display = 'none'; }
+                localStorage.setItem('hebraica_' + _logoAlvo, data);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+        // Carregar logos salvos
+        ['logo1','logo2'].forEach(function(k) {
+            const saved = localStorage.getItem('hebraica_' + k);
+            if (saved) {
+                const img = document.getElementById(k + 'Img');
+                const ph  = document.getElementById(k + 'Ph');
+                if (img) { img.src = saved; img.style.display = 'block'; }
+                if (ph)  { ph.style.display = 'none'; }
+            }
+        });
+
 // ── ESPECIALISTA DE SEGURANÇA ───────────────────────────────────────────────
 // Recuperar último DOIC salvo na sessão
 try {
@@ -9774,30 +9946,58 @@ async function gerarEspecialista() {
     btn.textContent = '⏳ Gerando documentos...';
     status.innerHTML = '🔍 Analisando evento e integrando com DOIC-8000... (60-90 segundos)';
 
-    // Montar objeto do evento
+    // Montar objeto do evento — novos campos
+    const diasMont   = document.getElementById('esp_dias_montagem')  ? document.getElementById('esp_dias_montagem').value  || '1' : '1';
+    const horasMont  = document.getElementById('esp_horas_montagem') ? document.getElementById('esp_horas_montagem').value || '4' : '4';
+    const horasDesm  = document.getElementById('esp_horas_desmontagem') ? document.getElementById('esp_horas_desmontagem').value || '4' : '4';
+    const diasEvento = document.getElementById('esp_dias_evento')    ? document.getElementById('esp_dias_evento').value    || '1' : '1';
+    const horasEvento= document.getElementById('esp_horas_evento')   ? document.getElementById('esp_horas_evento').value   || ''  : '';
+    const dataFimStr = document.getElementById('esp_data_fim')       ? document.getElementById('esp_data_fim').value       || ''  : '';
+    const modelo     = document.getElementById('esp_modelo')         ? document.getElementById('esp_modelo').value         || ''  : '';
+    const publExt    = document.getElementById('esp_publico_externo')? document.getElementById('esp_publico_externo').value|| 'Não': 'Não';
+    const espacoVal  = document.getElementById('esp_local')          ? document.getElementById('esp_local').value          || 'A definir' : 'A definir';
+    const isTotal    = (espacoVal === 'Clube inteiro' || espacoVal === 'Centro Cívico');
+    const montagemStr= diasMont + (diasMont==='1'?' dia':' dias') + ' de montagem, ' + horasMont + 'h por dia';
+    const duracaoStr = diasEvento + (diasEvento==='1'?' dia':' dias') + (horasEvento ? ', ' + horasEvento + 'h por dia' : '');
+    const dataFimFmt = dataFimStr ? new Date(dataFimStr+'T12:00:00').toLocaleDateString('pt-BR') : '';
+
     const evento = {
         nome_evento:              nome,
         tipo_evento:              document.getElementById('esp_tipo').value,
+        modelo_evento:            modelo,
         data:                     new Date(data + 'T12:00:00').toLocaleDateString('pt-BR'),
+        data_fim:                 dataFimFmt,
         horario:                  document.getElementById('esp_horario').value || 'A confirmar',
         termino:                  document.getElementById('esp_termino').value || 'A confirmar',
-        duracao:                  document.getElementById('esp_duracao').value || 'A definir',
-        montagem:                 document.getElementById('esp_montagem').value || 'A definir',
-        local_hebraica:           document.getElementById('esp_local').value || 'Portaria Rua Hungria, 1.000',
+        duracao:                  duracaoStr,
+        dias_evento:              diasEvento,
+        horas_evento:             horasEvento,
+        montagem:                 montagemStr,
+        dias_montagem:            diasMont,
+        horas_montagem:           horasMont,
+        horas_desmontagem:        horasDesm,
+                horas_vigilante_evento:    document.getElementById('esp_horas_vig_evento') ? document.getElementById('esp_horas_vig_evento').value : '12',
+                horas_vigilante_montagem:  document.getElementById('esp_horas_vig_montagem') ? document.getElementById('esp_horas_vig_montagem').value : '8',
+                horas_vigilante_desmontagem: document.getElementById('esp_horas_vig_desmontagem') ? document.getElementById('esp_horas_vig_desmontagem').value : '6',
+        local_hebraica:           espacoVal,
+        espaco_total:             isTotal,
         publico_estimado:         publico,
-        perfil_publico:           document.getElementById('esp_perfil').value,
-        familias_criancas:        document.getElementById('esp_familias').value,
+        perfil_publico:           publExt === 'Sim' ? 'Publico externo e interno' : 'Publico interno',
+        publico_externo:          publExt,
+        familias_criancas:        'Não informado',
         autoridades_vips:         document.getElementById('esp_vips').value,
-        objetivo_evento:          document.getElementById('esp_objetivo').value,
-        areas_restritas:          document.getElementById('esp_areas').value,
-        contexto_seguranca:       document.getElementById('esp_contexto').value,
+        objetivo_evento:          '',
+        areas_restritas:          '',
+        contexto_seguranca:       '',
         sensibilidade_institucional: document.getElementById('esp_sensibilidade').value,
-        recursos_existentes:      document.getElementById('esp_recursos').value,
-        recursos_proprios:        document.getElementById('esp_proprios').value,
+        recursos_existentes:      'Torniquetes, controle facial e biometrico, portal detector de metais, raio X, 5 vigilantes armados',
+        recursos_proprios:        '',
         apoio_medico:             document.getElementById('esp_medico').value,
         apoio_policial:           document.getElementById('esp_policial').value,
-        orcamento_max:            document.getElementById('esp_orcamento_max').value,
-        informacoes_adicionais:   document.getElementById('esp_adicional').value,
+        orcamento_max:            '',
+        informacoes_adicionais:   document.getElementById('esp_adicional').value +
+            (isTotal ? ' ATENCAO: Espaco total (Clube inteiro/Centro Civico) — orcamento a definir apos analise detalhada.' : ''),
+        tabela_valores:           { vigilante_6h:261.00, vigilante_8h:344.50, vigilante_12h:518.00, policial:1018.50, viatura:2500.00, coordenador:600.00 }
     };
 
     // Recuperar último DOIC-8000 salvo
