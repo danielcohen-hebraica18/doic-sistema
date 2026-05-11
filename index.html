@@ -74,7 +74,7 @@
             border: 1px solid rgba(46,109,164,0.25);
             border-bottom: none;
             border-radius: 16px 16px 0 0;
-            padding: 36px 36px 28px;
+            padding: 24px 32px 20px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -89,44 +89,24 @@
         }
 
         /* ESCUDO */
-        .shield-wrap {
-            width: 72px;
-            height: 72px;
-            margin: 0 auto 18px;
-            background: linear-gradient(135deg, #1B3A5C, #2E6DA4);
+        /* LOGO UPLOAD */
+        .logo-upload-wrap {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 16px;
+            background: rgba(255,255,255,0.04);
+            border: 1px dashed rgba(46,109,164,0.35);
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
-            box-shadow: 0 8px 32px rgba(46,109,164,0.4), 0 0 0 1px rgba(46,109,164,0.3);
-            animation: glow 3s ease-in-out infinite;
+            cursor: pointer;
+            transition: all 0.25s;
+            overflow: hidden;
         }
-
-        @keyframes glow {
-            0%,100% { box-shadow: 0 8px 32px rgba(46,109,164,0.4), 0 0 0 1px rgba(46,109,164,0.3); }
-            50%      { box-shadow: 0 8px 40px rgba(46,109,164,0.65), 0 0 0 1px rgba(46,109,164,0.5); }
-        }
-
-        /* LOGOS */
-        .logo-row {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-
-        .logo-slot {
-            width: 48px;
-            height: 48px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            color: rgba(148,163,184,0.5);
+        .logo-upload-wrap:hover {
+            background: rgba(46,109,164,0.1);
+            border-color: rgba(46,109,164,0.6);
         }
 
         .card-header h1 {
@@ -179,7 +159,7 @@
             border: 1px solid rgba(46,109,164,0.25);
             border-top: none;
             border-radius: 0 0 16px 16px;
-            padding: 32px 36px 28px;
+            padding: 24px 32px 22px;
         }
 
         .form-group {
@@ -284,20 +264,20 @@
 
     <div class="card">
         <div class="card-header">
-            <div class="shield-wrap">🛡️</div>
-
-            <div class="logo-row">
-                <div class="logo-slot">🏛️</div>
-                <div class="logo-slot">🔐</div>
+            <!-- LOGO DO CLUBE — clique para trocar -->
+            <div class="logo-upload-wrap" onclick="document.getElementById('logoInput').click()" title="Clique para inserir o logo do Clube">
+                <img id="logoImg" src="" alt="" style="display:none; max-width:100%; max-height:100%; object-fit:contain; border-radius:12px;">
+                <div id="logoPlaceholder" style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+                    <span style="font-size:36px;">🏛️</span>
+                    <span style="font-size:10px; color:rgba(148,163,184,0.5); letter-spacing:1px;">Inserir Logo</span>
+                </div>
             </div>
+            <input type="file" id="logoInput" accept="image/*" style="display:none;" onchange="loadLogo(this)">
 
             <h1>Sistema de Inteligência</h1>
             <div class="subtitle">Clube A Hebraica · Departamento de Segurança</div>
 
-            <div class="badge-protocolo">
-                <div class="badge-dot"></div>
-                Protocolo DOIC-8000 · Acesso Restrito
-            </div>
+
         </div>
 
         <div class="card-body">
@@ -324,6 +304,27 @@
     </div>
 
     <script>
+        // Carregar logo salvo
+        const savedLogo = localStorage.getItem('hebraica_login_logo');
+        if (savedLogo) {
+            document.getElementById('logoImg').src = savedLogo;
+            document.getElementById('logoImg').style.display = 'block';
+            document.getElementById('logoPlaceholder').style.display = 'none';
+        }
+
+        function loadLogo(input) {
+            if (!input.files || !input.files[0]) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const data = e.target.result;
+                document.getElementById('logoImg').src = data;
+                document.getElementById('logoImg').style.display = 'block';
+                document.getElementById('logoPlaceholder').style.display = 'none';
+                localStorage.setItem('hebraica_login_logo', data);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const email    = document.getElementById('email').value;
