@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Inteligência — Acesso Restrito</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #060d18;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* FUNDO COM EFEITO */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 20% 20%, rgba(13,42,92,0.45) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 50% at 80% 80%, rgba(8,25,55,0.4) 0%, transparent 60%),
+                radial-gradient(ellipse 40% 40% at 50% 50%, rgba(46,109,164,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 60px,
+                rgba(46,109,164,0.04) 60px,
+                rgba(46,109,164,0.04) 61px
+            ),
+            repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 60px,
+                rgba(46,109,164,0.02) 60px,
+                rgba(46,109,164,0.02) 61px
+            );
+            pointer-events: none;
+        }
+
+        /* CARD DE LOGIN */
+        .card {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 420px;
+            margin: 20px;
+            animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity:0; transform:translateY(24px); }
+            to   { opacity:1; transform:translateY(0); }
+        }
+
+        /* HEADER DO CARD */
+        .card-header {
+            background: linear-gradient(180deg, #0d1b2a 0%, #0a1628 100%);
+            border: 1px solid rgba(46,109,164,0.25);
+            border-bottom: none;
+            border-radius: 16px 16px 0 0;
+            padding: 24px 32px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(100,160,220,0.5), transparent);
+        }
+
+        /* ESCUDO */
+        /* LOGO UPLOAD */
+        .logo-upload-wrap {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 16px;
+            background: rgba(255,255,255,0.04);
+            border: 1px dashed rgba(46,109,164,0.35);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.25s;
+            overflow: hidden;
+        }
+        .logo-upload-wrap:hover {
+            background: rgba(46,109,164,0.1);
+            border-color: rgba(46,109,164,0.6);
+        }
+
+        .card-header h1 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #e2e8f0;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .card-header .subtitle {
+            font-size: 12px;
+            color: rgba(148,163,184,0.6);
+            letter-spacing: 1px;
+        }
+
+        .badge-protocolo {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 12px;
+            background: rgba(46,109,164,0.12);
+            border: 1px solid rgba(46,109,164,0.25);
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 10px;
+            color: rgba(100,160,220,0.8);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .badge-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 6px #22c55e;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%,100% { opacity:1; }
+            50%      { opacity:0.5; }
+        }
+
+        /* BODY DO CARD */
+        .card-body {
+            background: #0d1b2a;
+            border: 1px solid rgba(46,109,164,0.25);
+            border-top: none;
+            border-radius: 0 0 16px 16px;
+            padding: 24px 32px 22px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 11px;
+            font-weight: 600;
+            color: rgba(100,116,139,0.9);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 13px 16px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(46,109,164,0.25);
+            border-radius: 10px;
+            font-size: 14px;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.25s ease;
+        }
+
+        .form-group input::placeholder {
+            color: rgba(100,116,139,0.5);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: rgba(46,109,164,0.6);
+            background: rgba(46,109,164,0.08);
+            box-shadow: 0 0 0 3px rgba(46,109,164,0.1);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #1B3A5C 0%, #2E6DA4 100%);
+            color: white;
+            border: 1px solid rgba(46,109,164,0.4);
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            font-family: 'Rajdhani', sans-serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 16px rgba(46,109,164,0.25);
+            margin-top: 4px;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(46,109,164,0.4);
+            filter: brightness(1.1);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        .error-message {
+            background: rgba(220,38,38,0.1);
+            border: 1px solid rgba(220,38,38,0.3);
+            color: #fca5a5;
+            padding: 10px 14px;
+            border-radius: 8px;
+            margin-bottom: 18px;
+            font-size: 13px;
+            display: none;
+            text-align: center;
+        }
+
+        .card-footer {
+            text-align: center;
+            padding-top: 20px;
+            font-size: 11px;
+            color: rgba(100,116,139,0.4);
+            letter-spacing: 0.5px;
+        }
+
+        /* DECORAÇÃO LATERAL */
+        .deco-line {
+            position: fixed;
+            top: 0; bottom: 0;
+            width: 1px;
+            background: linear-gradient(180deg, transparent 0%, rgba(46,109,164,0.3) 30%, rgba(46,109,164,0.15) 70%, transparent 100%);
+        }
+        .deco-line-left  { left: 10%; }
+        .deco-line-right { right: 10%; }
+    </style>
+</head>
+<body>
+    <div class="deco-line deco-line-left"></div>
+    <div class="deco-line deco-line-right"></div>
+
+    <div class="card">
+        <div class="card-header">
+            <!-- LOGO DO CLUBE — clique para trocar -->
+            <div class="logo-upload-wrap" onclick="document.getElementById('logoInput').click()" title="Clique para inserir o logo do Clube">
+                <img id="logoImg" src="" alt="" style="display:none; max-width:100%; max-height:100%; object-fit:contain; border-radius:12px;">
+                <div id="logoPlaceholder" style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+                    <span style="font-size:36px;">🏛️</span>
+                    <span style="font-size:10px; color:rgba(148,163,184,0.5); letter-spacing:1px;">Inserir Logo</span>
+                </div>
+            </div>
+            <input type="file" id="logoInput" accept="image/*" style="display:none;" onchange="loadLogo(this)">
+
+            <h1>Sistema de Inteligência</h1>
+            <div class="subtitle">Clube A Hebraica · Departamento de Segurança</div>
+
+
+        </div>
+
+        <div class="card-body">
+            <div class="error-message" id="errorMessage">
+                ⚠️ Credenciais inválidas. Tente novamente.
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>E-mail</label>
+                    <input type="email" id="email" placeholder="seu@email.com.br" required autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label>Senha</label>
+                    <input type="password" id="password" placeholder="••••••••••••" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn-login">Acessar o Sistema</button>
+            </form>
+
+            <div class="card-footer">
+                © 2026 Clube A Hebraica · Uso interno restrito
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Carregar logo salvo
+        const savedLogo = localStorage.getItem('hebraica_login_logo');
+        if (savedLogo) {
+            document.getElementById('logoImg').src = savedLogo;
+            document.getElementById('logoImg').style.display = 'block';
+            document.getElementById('logoPlaceholder').style.display = 'none';
+        }
+
+        function loadLogo(input) {
+            if (!input.files || !input.files[0]) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const data = e.target.result;
+                document.getElementById('logoImg').src = data;
+                document.getElementById('logoImg').style.display = 'block';
+                document.getElementById('logoPlaceholder').style.display = 'none';
+                localStorage.setItem('hebraica_login_logo', data);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email    = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            if (email === 'admin@hebraica.com.br' && password === 'Hebraica@2026') {
+                sessionStorage.setItem('hebraica_auth', 'true');
+                sessionStorage.setItem('hebraica_user', email);
+                window.location.href = 'sistema.html';
+            } else {
+                document.getElementById('errorMessage').style.display = 'block';
+            }
+        });
+        if (sessionStorage.getItem('hebraica_auth') === 'true') {
+            window.location.href = 'sistema.html';
+        }
+    </script>
+</body>
+</html>
