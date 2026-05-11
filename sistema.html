@@ -1741,6 +1741,94 @@
     animation: fadeIn 0.15s ease !important;
 }
 </style>
+<style id="uniform-tabs">
+/* Uniformizar formatação de todas as tabs de Dados igual à de Ocorrências */
+#dadosModal .tab-content,
+#dadosModal .tab-content * {
+    color: #e2e8f0 !important;
+}
+#dadosModal .tab-content h3,
+#dadosModal .tab-content h4 {
+    color: #ffffff !important;
+    font-size: 16px !important;
+    margin-bottom: 16px !important;
+    padding-bottom: 8px !important;
+    border-bottom: 1px solid rgba(46,109,164,0.2) !important;
+}
+#dadosModal .tab-content input,
+#dadosModal .tab-content select,
+#dadosModal .tab-content textarea {
+    background: rgba(255,255,255,0.05) !important;
+    border: 1px solid rgba(46,109,164,0.3) !important;
+    color: #e2e8f0 !important;
+    border-radius: 8px !important;
+    padding: 10px 12px !important;
+}
+#dadosModal .tab-content label {
+    color: rgba(148,163,184,0.85) !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    display: block !important;
+    margin-bottom: 5px !important;
+}
+#dadosModal .tab-content button:not(.tab) {
+    background: linear-gradient(135deg, #1B3A5C, #2E6DA4) !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 9px 16px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+}
+#dadosModal .tab-content table {
+    width: 100%;
+    border-collapse: collapse;
+}
+#dadosModal .tab-content th {
+    background: #0d1b2a !important;
+    color: #93c5fd !important;
+    border-bottom: 2px solid rgba(46,109,164,0.3) !important;
+    padding: 10px 12px !important;
+    text-align: left !important;
+    font-size: 11px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+}
+#dadosModal .tab-content td {
+    padding: 9px 12px !important;
+    border-bottom: 1px solid rgba(46,109,164,0.1) !important;
+    color: #cbd5e1 !important;
+    font-size: 13px !important;
+}
+#dadosModal .tab-content tr:hover td {
+    background: rgba(46,109,164,0.08) !important;
+}
+/* Cards e seções internas */
+#dadosModal .tab-content > div[style*="background"],
+#dadosModal .tab-content .card,
+#dadosModal .tab-content .section {
+    background: #0d1b2a !important;
+    border: 1px solid rgba(46,109,164,0.2) !important;
+    border-radius: 10px !important;
+}
+/* Badges de status */
+#dadosModal .tab-content .badge,
+#dadosModal .tab-content [class*="badge"] {
+    border-radius: 20px !important;
+    padding: 3px 10px !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+}
+/* Separadores */
+#dadosModal .tab-content hr {
+    border-color: rgba(46,109,164,0.2) !important;
+}
+/* Títulos de seção */
+#dadosModal .tab-content small,
+#dadosModal .tab-content .hint {
+    color: rgba(100,116,139,0.7) !important;
+}
+</style>
 </head>
 <body>
     <!-- Verificação de autenticação -->
@@ -1857,7 +1945,7 @@
                 </div>
                 <div class="tabs">
                     <button class="tab active" onclick="switchTab('add')">➕ Adicionar Procedimento</button>
-                    <button class="tab" onclick="switchTab('shortcuts')">⚡ Configurar Atalhos</button>
+                    
                     <button class="tab" onclick="switchTab('logos')">🎨 Logos</button>
                     <button class="tab" onclick="switchTab('backup')">💾 Backup/Restaurar</button>
                     <button class="tab" onclick="switchTab('pending')">📥 Pendentes <span id="pendingTabCount">(0)</span></button>
@@ -1932,7 +2020,7 @@ Aguardar bombeiros em local seguro" style="width: 100%; padding: 12px; border: 2
 
                     <button class="btn btn-primary" onclick="addNewProcedureSimple()">✅ Adicionar Procedimento</button>
                 </div>
-                <div class="tab-content" id="shortcutsTab"><div id="shortcutsList"></div></div>
+                
                 <div class="tab-content" id="logosTab">
                     <h3 style="margin-bottom: 20px; color: #1e293b;">🎨 Configurar Logos</h3>
                     <div style="margin-bottom: 30px;">
@@ -8814,7 +8902,7 @@ async function gerarPDFComJsPDF(result) {
                     <button class="tab" onclick="switchDadosTab('chaves')">🔑 Controle Chaves</button>
                     <button class="tab" onclick="switchDadosTab('historico')">📜 Histórico Chaves</button>
                     <button class="tab" onclick="switchDadosTab('imagem')">📸 Solicitação Imagem</button>
-                    <button class="tab" onclick="switchDadosTab('export')">📥 Export PBI</button>
+                    
                 </div>
 
                 <div class="tab-content active" id="ocorrenciasTab">
@@ -9768,10 +9856,7 @@ async function gerarPDFComJsPDF(result) {
                     <div id="listaImagens" style="overflow-x:auto;"></div>
                 </div>
 
-                <div class="tab-content" id="exportTab">
-                    <h3 style="margin-bottom:20px;color:#1e293b;">📥 Exportar Power BI</h3>
-                    <p>🚧 Exportação em desenvolvimento...</p>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -9918,42 +10003,18 @@ async function gerarPDFComJsPDF(result) {
             <input id="esp_horas_montagem" type="number" min="0" placeholder="Ex: 4" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
           </div>
 
-          <div>
-            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Jornada Vigilante — Montagem</label>
-            <select id="esp_horas_vig_montagem" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
-              <option value="8">8 horas — R$ 344,50/vig</option>
-              <option value="6">6 horas — R$ 261,00/vig</option>
-              <option value="12">12 horas — R$ 518,00/vig</option>
-            </select>
-          </div>
+          
 
-          <div>
-            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Dia de Desmontagem</label>
-            <input id="esp_data_desmontagem" type="date" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
-          </div>
+
 
           <div>
             <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Duração da Desmontagem (h)</label>
             <input id="esp_horas_desmontagem" type="number" min="0" placeholder="Ex: 3" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
           </div>
 
-          <div>
-            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Jornada Vigilante — Desmontagem</label>
-            <select id="esp_horas_vig_desmontagem" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
-              <option value="6">6 horas — R$ 261,00/vig</option>
-              <option value="8">8 horas — R$ 344,50/vig</option>
-              <option value="12">12 horas — R$ 518,00/vig</option>
-            </select>
-          </div>
+          
 
-          <div style="grid-column:1/-1;">
-            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Jornada Vigilante — Evento</label>
-            <select id="esp_horas_vig_evento" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
-              <option value="12">12 horas — R$ 518,00/vig</option>
-              <option value="8">8 horas — R$ 344,50/vig</option>
-              <option value="6">6 horas — R$ 261,00/vig</option>
-            </select>
-          </div>
+          
 
         </div>
       </div>
