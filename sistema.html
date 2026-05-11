@@ -1237,7 +1237,7 @@
             margin: 20px auto;
             padding: 20px;
             font-family: 'Helvetica', Arial, sans-serif;
-            color: #000;
+            color: #e2e8f0;
             line-height: 1.6;
         }
         
@@ -1309,7 +1309,7 @@
         .dashboard {
             margin: 30px 0;
             padding: 20px;
-            background: #f8f9fa;
+            background: #060d18;
             border-radius: 8px;
         }
         
@@ -1342,7 +1342,7 @@
         }
         
         .card-ocorrencias { border-color: #d4af37; }
-        .card-ocorrencias .card-numero { color: #000; }
+        .card-ocorrencias .card-numero { color: #e2e8f0; }
         
         .card-ataques { border-color: #dc3545; }
         .card-ataques .card-numero { color: #dc3545; }
@@ -1438,7 +1438,7 @@
             font-size: 10pt;
             line-height: 1.7;
             margin-bottom: 12px;
-            color: #333;
+            color: #e2e8f0;
         }
         
         /* TABELAS */
@@ -1463,7 +1463,7 @@
         }
         
         .tabela-ocorrencias tbody tr:nth-child(even) {
-            background: #f8f9fa;
+            background: #060d18;
         }
         
         .num-ocorrencia {
@@ -1487,7 +1487,7 @@
         .matriz-risco {
             margin: 20px 0;
             padding: 15px;
-            background: #f8f9fa;
+            background: #060d18;
             border-radius: 5px;
         }
         
@@ -1504,7 +1504,7 @@
         
         .matriz-risco td {
             padding: 10px;
-            border: 1px solid #ddd;
+            border: 1px solid rgba(46,109,164,0.2);
         }
         
         .matriz-risco td:first-child {
@@ -1601,6 +1601,10 @@
 
                     <button onclick="openDados()" style="width:100%;padding:9px 12px;border-radius:8px;border:none;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:12px;font-weight:600;background:rgba(30,58,92,0.7);color:#93c5fd;text-align:left;transition:all 0.2s;" onmouseover="this.style.background='rgba(46,109,164,0.25)'" onmouseout="this.style.background='rgba(30,58,92,0.7)'">
                         <span style="font-size:16px;">📊</span> Base de Dados
+                    </button>
+
+                    <button onclick="abrirPowerBI()" style="width:100%;padding:9px 12px;border-radius:8px;border:none;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:12px;font-weight:600;background:rgba(30,58,92,0.7);color:#93c5fd;text-align:left;transition:all 0.2s;" onmouseover="this.style.background='rgba(46,109,164,0.25)'" onmouseout="this.style.background='rgba(30,58,92,0.7)'">
+                        <span style="font-size:16px;">📈</span> Power BI
                     </button>
 
                     <button onclick="openAdminPanel()" style="width:100%;padding:9px 12px;border-radius:8px;border:none;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:12px;font-weight:600;background:rgba(30,58,92,0.7);color:#93c5fd;text-align:left;transition:all 0.2s;" onmouseover="this.style.background='rgba(46,109,164,0.25)'" onmouseout="this.style.background='rgba(30,58,92,0.7)'">
@@ -9578,32 +9582,32 @@ async function gerarPDFComJsPDF(result) {
      MODAL ESPECIALISTA DE SEGURANÇA
 ═══════════════════════════════════════════════════════════════════════ -->
 <div id="modalEspecialista" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:9999; overflow-y:auto;">
-  <div style="background:#fff; margin:20px auto; max-width:700px; border-radius:12px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.4);">
+  <div style="background:#060d18; margin:20px auto; max-width:700px; border-radius:12px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.6); border:1px solid rgba(46,109,164,0.25);">
     <!-- Header -->
     <div style="background:linear-gradient(135deg,#0D1B2A 0%,#1B3A5C 100%); padding:20px 24px; display:flex; justify-content:space-between; align-items:center;">
       <div>
-        <div style="color:#AEC6E8; font-size:11px; font-weight:600; letter-spacing:1px;">PROTOCOLO DOIC-8000 · ASS ESRM · OTTO · Planejamento de Eventos</div>
+        
         <div style="color:white; font-size:18px; font-weight:700; margin-top:4px;">🛡️ Especialista em Segurança</div>
       </div>
       <button onclick="fecharEspecialista()" style="background:rgba(255,255,255,0.15); border:none; color:white; width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:18px; display:flex; align-items:center; justify-content:center;">×</button>
     </div>
 
     <!-- Formulário -->
-    <div style="padding:24px; background:#f8fafc;">
+    <div style="padding:24px; background:#060d18;">
 
       <!-- SEÇÃO 1: IDENTIFICAÇÃO DO EVENTO -->
-      <div style="background:white;border-radius:10px;padding:16px;margin-bottom:12px;border:1px solid #e2e8f0;">
-        <div style="font-size:10px;font-weight:700;color:#64748b;letter-spacing:1.5px;margin-bottom:12px;text-transform:uppercase;">📋 Identificação do Evento</div>
+      <div style="background:#0d1b2a;border-radius:10px;padding:16px;margin-bottom:12px;border:1px solid rgba(46,109,164,0.2);">
+        <div style="font-size:10px;font-weight:700;color:rgba(100,116,139,0.7);letter-spacing:1.5px;margin-bottom:12px;text-transform:uppercase;">📋 Identificação do Evento</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
 
           <div style="grid-column:1/-1;">
-            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Nome do Evento *</label>
-            <input id="esp_nome" type="text" placeholder="Ex: Formatura Colégio Hebraica 2026" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:rgba(148,163,184,0.85);display:block;margin-bottom:3px;">Nome do Evento *</label>
+            <input id="esp_nome" type="text" placeholder="Ex: Formatura Colégio Hebraica 2026" style="width:100%;padding:8px 10px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.25);border-radius:6px;font-size:13px;box-sizing:border-box;color:#e2e8f0;">
           </div>
 
           <div>
-            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Tipo de Evento *</label>
-            <select id="esp_tipo" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:rgba(148,163,184,0.85);display:block;margin-bottom:3px;">Tipo de Evento *</label>
+            <select id="esp_tipo" style="width:100%;padding:8px 10px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.25);border-radius:6px;font-size:13px;box-sizing:border-box;color:#e2e8f0;">
               <option value="">Selecione...</option>
               <option>Formatura / Cerimônia</option>
               <option>Evento Esportivo</option>
@@ -9617,8 +9621,8 @@ async function gerarPDFComJsPDF(result) {
           </div>
 
           <div>
-            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Modelo do Evento</label>
-            <select id="esp_modelo" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:rgba(148,163,184,0.85);display:block;margin-bottom:3px;">Modelo do Evento</label>
+            <select id="esp_modelo" style="width:100%;padding:8px 10px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.25);border-radius:6px;font-size:13px;box-sizing:border-box;color:#e2e8f0;">
               <option value="">Selecione...</option>
               <option>Aberto ao público</option>
               <option>Fechado — convidados</option>
@@ -9629,51 +9633,51 @@ async function gerarPDFComJsPDF(result) {
           </div>
 
           <div>
-            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Data de Início *</label>
-            <input id="esp_data" type="date" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:rgba(148,163,184,0.85);display:block;margin-bottom:3px;">Data de Início *</label>
+            <input id="esp_data" type="date" style="width:100%;padding:8px 10px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.25);border-radius:6px;font-size:13px;box-sizing:border-box;color:#e2e8f0;">
           </div>
 
           <div>
-            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Data de Término</label>
-            <input id="esp_data_fim" type="date" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:rgba(148,163,184,0.85);display:block;margin-bottom:3px;">Data de Término</label>
+            <input id="esp_data_fim" type="date" style="width:100%;padding:8px 10px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.25);border-radius:6px;font-size:13px;box-sizing:border-box;color:#e2e8f0;">
           </div>
 
           <div>
-            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Início (hora) *</label>
-            <input id="esp_horario" type="time" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:rgba(148,163,184,0.85);display:block;margin-bottom:3px;">Início (hora) *</label>
+            <input id="esp_horario" type="time" style="width:100%;padding:8px 10px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.25);border-radius:6px;font-size:13px;box-sizing:border-box;color:#e2e8f0;">
           </div>
 
           <div>
-            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Término (hora)</label>
-            <input id="esp_termino" type="time" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:rgba(148,163,184,0.85);display:block;margin-bottom:3px;">Término (hora)</label>
+            <input id="esp_termino" type="time" style="width:100%;padding:8px 10px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.25);border-radius:6px;font-size:13px;box-sizing:border-box;color:#e2e8f0;">
           </div>
 
           <div>
-            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Dias de Evento</label>
-            <input id="esp_dias_evento" type="number" min="1" placeholder="Ex: 1" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:rgba(148,163,184,0.85);display:block;margin-bottom:3px;">Dias de Evento</label>
+            <input id="esp_dias_evento" type="number" min="1" placeholder="Ex: 1" style="width:100%;padding:8px 10px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.25);border-radius:6px;font-size:13px;box-sizing:border-box;color:#e2e8f0;">
           </div>
 
           <div>
-            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Horas Evento (h)</label>
-            <input id="esp_horas_evento" type="number" min="1" placeholder="Ex: 6" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:rgba(148,163,184,0.85);display:block;margin-bottom:3px;">Horas Evento (h)</label>
+            <input id="esp_horas_evento" type="number" min="1" placeholder="Ex: 6" style="width:100%;padding:8px 10px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.25);border-radius:6px;font-size:13px;box-sizing:border-box;color:#e2e8f0;">
           </div>
 
           <div>
-            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Público *</label>
-            <input id="esp_publico" type="number" min="1" placeholder="Ex: 300" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:rgba(148,163,184,0.85);display:block;margin-bottom:3px;">Público *</label>
+            <input id="esp_publico" type="number" min="1" placeholder="Ex: 300" style="width:100%;padding:8px 10px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.25);border-radius:6px;font-size:13px;box-sizing:border-box;color:#e2e8f0;">
           </div>
 
           <div>
-            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Público Externo?</label>
-            <select id="esp_publico_externo" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:rgba(148,163,184,0.85);display:block;margin-bottom:3px;">Público Externo?</label>
+            <select id="esp_publico_externo" style="width:100%;padding:8px 10px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.25);border-radius:6px;font-size:13px;box-sizing:border-box;color:#e2e8f0;">
               <option value="Não">Não</option>
               <option value="Sim">Sim</option>
             </select>
           </div>
 
           <div>
-            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Acesso ao Clube Posteriormente?</label>
-            <select id="esp_acesso_posterior" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:rgba(148,163,184,0.85);display:block;margin-bottom:3px;">Acesso ao Clube Posteriormente?</label>
+            <select id="esp_acesso_posterior" style="width:100%;padding:8px 10px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.25);border-radius:6px;font-size:13px;box-sizing:border-box;color:#e2e8f0;">
               <option value="Não">Não</option>
               <option value="Sim">Sim</option>
             </select>
@@ -9683,13 +9687,13 @@ async function gerarPDFComJsPDF(result) {
       </div>
 
       <!-- SEÇÃO 2: ESPAÇO E MONTAGEM -->
-      <div style="background:white;border-radius:10px;padding:16px;margin-bottom:12px;border:1px solid #e2e8f0;">
-        <div style="font-size:10px;font-weight:700;color:#64748b;letter-spacing:1.5px;margin-bottom:12px;text-transform:uppercase;">📍 Espaço e Montagem</div>
+      <div style="background:#0d1b2a;border-radius:10px;padding:16px;margin-bottom:12px;border:1px solid rgba(46,109,164,0.2);">
+        <div style="font-size:10px;font-weight:700;color:rgba(100,116,139,0.7);letter-spacing:1.5px;margin-bottom:12px;text-transform:uppercase;">📍 Espaço e Montagem</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
 
           <div style="grid-column:1/-1;">
-            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Espaço a ser utilizado *</label>
-            <select id="esp_local" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;" onchange="verificarEspacoTotal(this.value)">
+            <label style="font-size:11px;font-weight:600;color:rgba(148,163,184,0.85);display:block;margin-bottom:3px;">Espaço a ser utilizado *</label>
+            <select id="esp_local" style="width:100%;padding:8px 10px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.25);border-radius:6px;font-size:13px;box-sizing:border-box;color:#e2e8f0;" onchange="verificarEspacoTotal(this.value)">
               <option value="">Selecione o espaço...</option>
               <option value="Marc Chagall">Marc Chagall</option>
               <option value="Teatro Anne Frank">Teatro Anne Frank</option>
@@ -9700,31 +9704,31 @@ async function gerarPDFComJsPDF(result) {
               <option value="Centro Cívico">Centro Cívico</option>
               <option value="Clube inteiro">Clube inteiro</option>
             </select>
-            <div id="aviso_espaco_total" style="display:none;margin-top:6px;padding:8px 10px;background:#fef3c7;border:1px solid #f59e0b;border-radius:6px;font-size:11px;color:#92400e;">
+            <div id="aviso_espaco_total" style="display:none;margin-top:6px;padding:8px 10px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.4);border-radius:6px;font-size:11px;color:#fcd34d;">
               ⚠️ Para uso do Clube inteiro ou Centro Cívico, os valores de orçamento serão definidos posteriormente após análise detalhada.
             </div>
           </div>
 
           <div>
-            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Dias de Montagem</label>
-            <input id="esp_dias_montagem" type="number" min="0" placeholder="Ex: 1" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:rgba(148,163,184,0.85);display:block;margin-bottom:3px;">Dias de Montagem</label>
+            <input id="esp_dias_montagem" type="number" min="0" placeholder="Ex: 1" style="width:100%;padding:8px 10px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.25);border-radius:6px;font-size:13px;box-sizing:border-box;color:#e2e8f0;">
           </div>
 
           <div>
-            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Duração da Montagem (h)</label>
-            <input id="esp_horas_montagem" type="number" min="0" placeholder="Ex: 4" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:rgba(148,163,184,0.85);display:block;margin-bottom:3px;">Duração da Montagem (h)</label>
+            <input id="esp_horas_montagem" type="number" min="0" placeholder="Ex: 4" style="width:100%;padding:8px 10px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.25);border-radius:6px;font-size:13px;box-sizing:border-box;color:#e2e8f0;">
           </div>
 
 
 
           <div>
-            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Dias de Desmontagem</label>
-            <input id="esp_dias_desmontagem" type="number" min="0" placeholder="Ex: 1" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:rgba(148,163,184,0.85);display:block;margin-bottom:3px;">Dias de Desmontagem</label>
+            <input id="esp_dias_desmontagem" type="number" min="0" placeholder="Ex: 1" style="width:100%;padding:8px 10px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.25);border-radius:6px;font-size:13px;box-sizing:border-box;color:#e2e8f0;">
           </div>
 
           <div>
-            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Duração da Desmontagem (h)</label>
-            <input id="esp_horas_desmontagem" type="number" min="0" placeholder="Ex: 3" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:rgba(148,163,184,0.85);display:block;margin-bottom:3px;">Duração da Desmontagem (h)</label>
+            <input id="esp_horas_desmontagem" type="number" min="0" placeholder="Ex: 3" style="width:100%;padding:8px 10px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.25);border-radius:6px;font-size:13px;box-sizing:border-box;color:#e2e8f0;">
           </div>
 
 
@@ -9735,13 +9739,13 @@ async function gerarPDFComJsPDF(result) {
       </div>
 
       <!-- SEÇÃO 3: SEGURANÇA -->
-      <div style="background:white;border-radius:10px;padding:16px;margin-bottom:12px;border:1px solid #e2e8f0;">
-        <div style="font-size:10px;font-weight:700;color:#64748b;letter-spacing:1.5px;margin-bottom:12px;text-transform:uppercase;">🛡️ Contexto de Segurança</div>
+      <div style="background:#0d1b2a;border-radius:10px;padding:16px;margin-bottom:12px;border:1px solid rgba(46,109,164,0.2);">
+        <div style="font-size:10px;font-weight:700;color:rgba(100,116,139,0.7);letter-spacing:1.5px;margin-bottom:12px;text-transform:uppercase;">🛡️ Contexto de Segurança</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
 
           <div>
-            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Apoio Médico</label>
-            <select id="esp_medico" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:rgba(148,163,184,0.85);display:block;margin-bottom:3px;">Apoio Médico</label>
+            <select id="esp_medico" style="width:100%;padding:8px 10px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.25);border-radius:6px;font-size:13px;box-sizing:border-box;color:#e2e8f0;">
               <option value="Não informado">Não informado</option>
               <option value="Sim — paramédico">Sim — paramédico</option>
               <option value="Sim — técnico de enfermagem">Sim — técnico de enfermagem</option>
@@ -9750,8 +9754,8 @@ async function gerarPDFComJsPDF(result) {
           </div>
 
           <div>
-            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Apoio Policial</label>
-            <select id="esp_policial" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:rgba(148,163,184,0.85);display:block;margin-bottom:3px;">Apoio Policial</label>
+            <select id="esp_policial" style="width:100%;padding:8px 10px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.25);border-radius:6px;font-size:13px;box-sizing:border-box;color:#e2e8f0;">
               <option value="Não">Não</option>
               <option value="Sim — PMESP solicitada">Sim — PMESP solicitada</option>
               <option value="Sim — PMESP confirmada">Sim — PMESP confirmada</option>
@@ -9759,8 +9763,8 @@ async function gerarPDFComJsPDF(result) {
           </div>
 
           <div>
-            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Sensibilidade Institucional</label>
-            <select id="esp_sensibilidade" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:rgba(148,163,184,0.85);display:block;margin-bottom:3px;">Sensibilidade Institucional</label>
+            <select id="esp_sensibilidade" style="width:100%;padding:8px 10px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.25);border-radius:6px;font-size:13px;box-sizing:border-box;color:#e2e8f0;">
               <option value="Não informado">Não informado</option>
               <option value="Alta — presença de imprensa">Alta — presença de imprensa</option>
               <option value="Alta — evento simbólico">Alta — evento simbólico</option>
@@ -9770,8 +9774,8 @@ async function gerarPDFComJsPDF(result) {
           </div>
 
           <div>
-            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Autoridades / VIPs</label>
-            <select id="esp_vips" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:rgba(148,163,184,0.85);display:block;margin-bottom:3px;">Autoridades / VIPs</label>
+            <select id="esp_vips" style="width:100%;padding:8px 10px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.25);border-radius:6px;font-size:13px;box-sizing:border-box;color:#e2e8f0;">
               <option value="Não">Não</option>
               <option value="Sim — autoridades locais">Sim — autoridades locais</option>
               <option value="Sim — autoridades estaduais">Sim — autoridades estaduais</option>
@@ -9780,8 +9784,8 @@ async function gerarPDFComJsPDF(result) {
           </div>
 
           <div style="grid-column:1/-1;">
-            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Informações adicionais</label>
-            <textarea id="esp_adicional" rows="2" placeholder="Contexto relevante, observações especiais..." style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;resize:vertical;"></textarea>
+            <label style="font-size:11px;font-weight:600;color:rgba(148,163,184,0.85);display:block;margin-bottom:3px;">Informações adicionais</label>
+            <textarea id="esp_adicional" rows="2" placeholder="Contexto relevante, observações especiais..." style="width:100%;padding:8px 10px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.25);border-radius:6px;font-size:13px;box-sizing:border-box;color:#e2e8f0;resize:vertical;"></textarea>
           </div>
 
         </div>
@@ -9816,7 +9820,7 @@ async function gerarPDFComJsPDF(result) {
       <button onclick="gerarEspecialista()" id="btnGerarEspecialista" style="width:100%; padding:14px; background:linear-gradient(135deg,#0D1B2A 0%,#1B3A5C 100%); color:white; border:none; border-radius:8px; font-size:14px; font-weight:700; cursor:pointer; letter-spacing:0.5px;">
         🛡️ Gerar Planejamento de Segurança
       </button>
-      <div id="especialistaStatus" style="margin-top:12px; text-align:center; font-size:13px; color:#64748b;"></div>
+      <div id="especialistaStatus" style="margin-top:12px; text-align:center; font-size:13px; color:rgba(148,163,184,0.7);"></div>
     </div>
   </div>
 </div>
@@ -9991,6 +9995,95 @@ async function gerarEspecialista() {
         btn.textContent = '🛡️ Gerar Planejamento de Segurança';
         status.innerHTML = '❌ Erro: ' + e.message;
     }
+}
+</script>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     MODAL POWER BI
+═══════════════════════════════════════════════════════ -->
+<div id="modalPowerBI" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);z-index:9999;display:flex;align-items:center;justify-content:center;" onclick="if(event.target===this)fecharPowerBI()">
+  <div style="background:#0d1b2a;border:1px solid rgba(46,109,164,0.3);border-radius:16px;width:100%;max-width:480px;margin:20px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,0.5);" onclick="event.stopPropagation()">
+
+    <!-- Header -->
+    <div style="background:linear-gradient(135deg,#080f1a,#0d1b2a);padding:20px 24px;border-bottom:1px solid rgba(46,109,164,0.2);display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <div style="font-size:10px;font-weight:700;color:rgba(100,116,139,0.7);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;">Dashboards</div>
+        <div style="color:#e2e8f0;font-size:17px;font-weight:700;display:flex;align-items:center;gap:10px;">
+          <span style="font-size:22px;">📈</span> Power BI Reports
+        </div>
+      </div>
+      <button onclick="fecharPowerBI()" style="background:rgba(255,255,255,0.08);border:none;color:rgba(148,163,184,0.7);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">×</button>
+    </div>
+
+    <!-- Lista de relatórios -->
+    <div style="padding:20px;display:flex;flex-direction:column;gap:10px;">
+
+      <div style="font-size:11px;color:rgba(100,116,139,0.6);margin-bottom:4px;letter-spacing:0.5px;">Selecione o relatório para abrir:</div>
+
+      <a href="https://redgastronomiacombr-my.sharepoint.com/:u:/g/personal/daniel_redgastronomia_com_br/IQAqst595fhsQYUghg9nZvDmATJE-hBYUHLOXDGeKuZORO8?e=Epm0ZW" target="_blank" onclick="fecharPowerBI()" style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.2);border-radius:10px;text-decoration:none;transition:all 0.2s;cursor:pointer;" onmouseover="this.style.background='rgba(46,109,164,0.12)';this.style.borderColor='rgba(46,109,164,0.45)'" onmouseout="this.style.background='rgba(255,255,255,0.04)';this.style.borderColor='rgba(46,109,164,0.2)'">
+        <div style="width:40px;height:40px;background:linear-gradient(135deg,#1B3A5C,#2E6DA4);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">📊</div>
+        <div>
+          <div style="color:#e2e8f0;font-size:13px;font-weight:600;">Assessment 2026</div>
+          <div style="color:rgba(100,116,139,0.6);font-size:11px;margin-top:2px;">Relatório de Assessment anual</div>
+        </div>
+        <div style="margin-left:auto;color:rgba(46,109,164,0.7);font-size:14px;">↗</div>
+      </a>
+
+      <a href="https://redgastronomiacombr-my.sharepoint.com/:u:/g/personal/daniel_redgastronomia_com_br/IQCohgy43LELTLWDj8NBZkMRAcy87dzsh7Tdnviz4jcBJvM?e=IcLACb" target="_blank" onclick="fecharPowerBI()" style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.2);border-radius:10px;text-decoration:none;transition:all 0.2s;cursor:pointer;" onmouseover="this.style.background='rgba(46,109,164,0.12)';this.style.borderColor='rgba(46,109,164,0.45)'" onmouseout="this.style.background='rgba(255,255,255,0.04)';this.style.borderColor='rgba(46,109,164,0.2)'">
+        <div style="width:40px;height:40px;background:linear-gradient(135deg,#1B3A5C,#2E6DA4);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">📅</div>
+        <div>
+          <div style="color:#e2e8f0;font-size:13px;font-weight:600;">Infos Eventos 2026</div>
+          <div style="color:rgba(100,116,139,0.6);font-size:11px;margin-top:2px;">Informações e dados de eventos</div>
+        </div>
+        <div style="margin-left:auto;color:rgba(46,109,164,0.7);font-size:14px;">↗</div>
+      </a>
+
+      <a href="https://redgastronomiacombr-my.sharepoint.com/:u:/g/personal/daniel_redgastronomia_com_br/IQAPQoiacS-zTp-7aR_AJ-KiAZbL0LW7knGy1xl0sL_mv8I?e=c3HIEO" target="_blank" onclick="fecharPowerBI()" style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.2);border-radius:10px;text-decoration:none;transition:all 0.2s;cursor:pointer;" onmouseover="this.style.background='rgba(46,109,164,0.12)';this.style.borderColor='rgba(46,109,164,0.45)'" onmouseout="this.style.background='rgba(255,255,255,0.04)';this.style.borderColor='rgba(46,109,164,0.2)'">
+        <div style="width:40px;height:40px;background:linear-gradient(135deg,#1B3A5C,#2E6DA4);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🔧</div>
+        <div>
+          <div style="color:#e2e8f0;font-size:13px;font-weight:600;">Manutenções 2026</div>
+          <div style="color:rgba(100,116,139,0.6);font-size:11px;margin-top:2px;">Controle de manutenções</div>
+        </div>
+        <div style="margin-left:auto;color:rgba(46,109,164,0.7);font-size:14px;">↗</div>
+      </a>
+
+      <a href="https://redgastronomiacombr-my.sharepoint.com/:u:/g/personal/daniel_redgastronomia_com_br/IQB_H1SNG5A7SZB3uYbLT3nOASnNw6xa4TUmNXz_BjTVOyw?e=s2EYcw" target="_blank" onclick="fecharPowerBI()" style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.2);border-radius:10px;text-decoration:none;transition:all 0.2s;cursor:pointer;" onmouseover="this.style.background='rgba(46,109,164,0.12)';this.style.borderColor='rgba(46,109,164,0.45)'" onmouseout="this.style.background='rgba(255,255,255,0.04)';this.style.borderColor='rgba(46,109,164,0.2)'">
+        <div style="width:40px;height:40px;background:linear-gradient(135deg,#1B3A5C,#2E6DA4);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🔢</div>
+        <div>
+          <div style="color:#e2e8f0;font-size:13px;font-weight:600;">Numeral 2026</div>
+          <div style="color:rgba(100,116,139,0.6);font-size:11px;margin-top:2px;">Indicadores numéricos</div>
+        </div>
+        <div style="margin-left:auto;color:rgba(46,109,164,0.7);font-size:14px;">↗</div>
+      </a>
+
+      <a href="https://redgastronomiacombr-my.sharepoint.com/:u:/g/personal/daniel_redgastronomia_com_br/IQDX9PpPJb1xR4R4u7iotUo6AY8XSzlLy14ADkGfukMo4p8?e=cS4IAj" target="_blank" onclick="fecharPowerBI()" style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.2);border-radius:10px;text-decoration:none;transition:all 0.2s;cursor:pointer;" onmouseover="this.style.background='rgba(46,109,164,0.12)';this.style.borderColor='rgba(46,109,164,0.45)'" onmouseout="this.style.background='rgba(255,255,255,0.04)';this.style.borderColor='rgba(46,109,164,0.2)'">
+        <div style="width:40px;height:40px;background:linear-gradient(135deg,#1B3A5C,#2E6DA4);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">⚠️</div>
+        <div>
+          <div style="color:#e2e8f0;font-size:13px;font-weight:600;">Ocorrências 2026</div>
+          <div style="color:rgba(100,116,139,0.6);font-size:11px;margin-top:2px;">Registro de ocorrências</div>
+        </div>
+        <div style="margin-left:auto;color:rgba(46,109,164,0.7);font-size:14px;">↗</div>
+      </a>
+
+    </div>
+
+    <!-- Footer -->
+    <div style="padding:14px 24px;border-top:1px solid rgba(46,109,164,0.15);text-align:center;">
+      <div style="font-size:10px;color:rgba(100,116,139,0.4);">Os relatórios abrem diretamente no SharePoint / Power BI</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function abrirPowerBI() {
+    document.getElementById('modalPowerBI').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+function fecharPowerBI() {
+    document.getElementById('modalPowerBI').style.display = 'none';
+    document.body.style.overflow = '';
 }
 </script>
 
