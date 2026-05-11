@@ -1570,22 +1570,7 @@
                 </div>
             </div>
             <div class="header-actions">
-                <button class="admin-btn btn-intel" onclick="gerarRelatorioCompleto()" style="background: linear-gradient(135deg, #1B3A5C 0%, #2E6DA4 100%); font-weight: 600;">
-                    🔍 Agente de Inteligência
-                </button>
-                <button class="admin-btn" onclick="abrirEspecialista()" style="background: linear-gradient(135deg, #1B3A5C 0%, #2E6DA4 100%); font-weight: 600;">
-                    🛡️ Especialista de Segurança
-                </button>
-
-                <button class="admin-btn btn-dados" onclick="openDados()" style="background: linear-gradient(135deg, #1B3A5C 0%, #2E6DA4 100%);">
-                    📊 Dados
-                </button>
-
-                <button class="admin-btn btn-painel" onclick="openAdminPanel()">
-                    ⚙️ Painel
-                    <span class="pending-badge" id="pendingCount">0</span>
-                </button>
-                <button class="admin-btn btn-sair" onclick="logout()">
+                <button class="admin-btn btn-sair" onclick="logout()" style="background: linear-gradient(135deg, #1B3A5C 0%, #2E6DA4 100%);">
                     🚪 Sair
                 </button>
             </div>
@@ -1594,20 +1579,7 @@
         <div class="main-content">
             <div class="sidebar">
 
-                <!-- LOGOS INSERÍVEIS -->
-                <div style="display:flex; gap:8px; padding:14px 14px 10px; border-bottom:1px solid rgba(46,109,164,0.15);">
-                    <div onclick="abrirUploadLogo('logo1')" title="Clique para inserir logo" style="width:44px;height:44px;background:rgba(255,255,255,0.05);border:1px dashed rgba(46,109,164,0.3);border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;transition:all 0.2s;" onmouseover="this.style.background='rgba(46,109,164,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">
-                        <img id="logo1Img" src="" style="display:none;width:100%;height:100%;object-fit:contain;border-radius:6px;">
-                        <span id="logo1Ph" style="font-size:18px;color:rgba(148,163,184,0.4);">🏛️</span>
-                    </div>
-                    <div onclick="abrirUploadLogo('logo2')" title="Clique para inserir logo" style="width:44px;height:44px;background:rgba(255,255,255,0.05);border:1px dashed rgba(46,109,164,0.3);border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;transition:all 0.2s;" onmouseover="this.style.background='rgba(46,109,164,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">
-                        <img id="logo2Img" src="" style="display:none;width:100%;height:100%;object-fit:contain;border-radius:6px;">
-                        <span id="logo2Ph" style="font-size:18px;color:rgba(148,163,184,0.4);">🔐</span>
-                    </div>
-                    <div style="flex:1;display:flex;align-items:center;padding-left:6px;">
-                        <div style="font-size:10px;color:rgba(100,116,139,0.6);line-height:1.4;">Clube A Hebraica<br><span style="font-size:9px;opacity:0.7;">Dep. Segurança</span></div>
-                    </div>
-                </div>
+                <div id="quickActions" style="display:none;"></div>
                 <input type="file" id="logoUploadInput" accept="image/*" style="display:none;" onchange="receberLogo(this)">
 
                 <!-- BOTÕES DE NAVEGAÇÃO -->
@@ -1638,13 +1610,7 @@
 
                 </div>
 
-                <!-- STATUS -->
-                <div style="padding:10px 14px;border-top:1px solid rgba(46,109,164,0.15);">
-                    <div style="display:flex;align-items:center;gap:7px;font-size:10px;color:rgba(100,116,139,0.7);">
-                        <div style="width:6px;height:6px;border-radius:50%;background:#22c55e;box-shadow:0 0 5px #22c55e;animation:pulse 2s infinite;flex-shrink:0;"></div>
-                        Protocolo DOIC-8000 ativo
-                    </div>
-                </div>
+
 
             </div>
 
