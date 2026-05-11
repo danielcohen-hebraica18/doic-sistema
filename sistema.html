@@ -544,7 +544,8 @@
         }
 
         .modal-content {
-            background: white;
+            background: #060d18;
+            border: 1px solid rgba(46,109,164,0.25);
             border-radius: 16px;
             width: 90%;
             max-width: 1000px;
@@ -565,6 +566,8 @@
         }
 
         .modal-header {
+            background: linear-gradient(135deg, #080f1a 0%, #0d1b2a 100%);
+            border-bottom: 1px solid rgba(46,109,164,0.25);
             background: linear-gradient(135deg, #003d82 0%, #0056b3 100%);
             color: white;
             padding: 20px 30px;
@@ -1542,6 +1545,82 @@
             }
         }
     </style>
+
+<style id="dark-modals-css">
+/* Tema escuro para modais de Dados e Painel */
+#dadosModal, #adminModal, #dadosContainer, #adminContainer,
+.dados-modal, .admin-modal, .modal-overlay {
+    background: #060d18 !important;
+    color: #e2e8f0 !important;
+}
+/* Painéis internos */
+.modal-content, .dados-content, .admin-content,
+[class*="modal"] > div, [class*="panel"] > div {
+    background: #060d18 !important;
+    color: #e2e8f0 !important;
+}
+/* Tabelas */
+table { border-collapse: collapse; width: 100%; }
+th {
+    background: #0d1b2a !important;
+    color: #93c5fd !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    padding: 10px 12px !important;
+    border-bottom: 1px solid rgba(46,109,164,0.3) !important;
+}
+td {
+    color: #cbd5e1 !important;
+    padding: 9px 12px !important;
+    border-bottom: 1px solid rgba(46,109,164,0.1) !important;
+    font-size: 13px !important;
+}
+tr:hover td { background: rgba(46,109,164,0.08) !important; }
+/* Inputs e selects dentro dos modais */
+.dados-section input, .dados-section select, .dados-section textarea,
+.admin-section input, .admin-section select, .admin-section textarea {
+    background: rgba(255,255,255,0.04) !important;
+    border: 1px solid rgba(46,109,164,0.25) !important;
+    color: #e2e8f0 !important;
+    border-radius: 8px !important;
+}
+/* Botões dentro dos modais */
+.dados-section button, .admin-section button,
+.tab-btn, .action-btn {
+    background: linear-gradient(135deg, #1B3A5C, #2E6DA4) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 8px 14px !important;
+    cursor: pointer !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+}
+/* Headers dos modais */
+.modal-header, .dados-header, .admin-header {
+    background: linear-gradient(135deg, #080f1a, #0d1b2a) !important;
+    border-bottom: 1px solid rgba(46,109,164,0.25) !important;
+    color: #e2e8f0 !important;
+}
+/* Cards e seções */
+.card, .section-card, .info-card {
+    background: #0d1b2a !important;
+    border: 1px solid rgba(46,109,164,0.2) !important;
+    border-radius: 10px !important;
+    color: #e2e8f0 !important;
+}
+/* Labels */
+label {
+    color: rgba(148,163,184,0.85) !important;
+}
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #060d18; }
+::-webkit-scrollbar-thumb { background: rgba(46,109,164,0.4); border-radius: 3px; }
+</style>
+
 </head>
 <body>
     <!-- Verificação de autenticação -->
@@ -10002,7 +10081,7 @@ async function gerarEspecialista() {
 <!-- ═══════════════════════════════════════════════════════
      MODAL POWER BI
 ═══════════════════════════════════════════════════════ -->
-<div id="modalPowerBI" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);z-index:9999;display:flex;align-items:center;justify-content:center;" onclick="if(event.target===this)fecharPowerBI()">
+<div id="modalPowerBI" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);z-index:9999;align-items:center;justify-content:center;" onclick="if(event.target===this)fecharPowerBI()">
   <div style="background:#0d1b2a;border:1px solid rgba(46,109,164,0.3);border-radius:16px;width:100%;max-width:480px;margin:20px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,0.5);" onclick="event.stopPropagation()">
 
     <!-- Header -->
