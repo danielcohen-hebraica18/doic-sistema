@@ -8596,7 +8596,7 @@ async function gerarPDFComJsPDF(result) {
     <div id="dadosModal" class="modal">
         <div class="modal-content" style="max-width: 95%; height: 90vh;">
             <div class="modal-header">
-                <h2>📊 Dados Operacionais - Airtable</h2>
+                <h2>📊 Dados Operacionais</h2>
                 <button class="close-btn" onclick="closeDados()">×</button>
             </div>
             <div class="modal-body">
@@ -9715,18 +9715,11 @@ async function gerarPDFComJsPDF(result) {
             <input id="esp_horas_montagem" type="number" min="0" placeholder="Ex: 4" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
           </div>
 
-          <div>
-            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Jornada Vigilante — Montagem</label>
-            <select id="esp_horas_vig_montagem" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
-              <option value="8">8 horas — R$ 344,50/vig</option>
-              <option value="6">6 horas — R$ 261,00/vig</option>
-              <option value="12">12 horas — R$ 518,00/vig</option>
-            </select>
-          </div>
+
 
           <div>
-            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Dia de Desmontagem</label>
-            <input id="esp_data_desmontagem" type="date" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Dias de Desmontagem</label>
+            <input id="esp_dias_desmontagem" type="number" min="0" placeholder="Ex: 1" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
           </div>
 
           <div>
@@ -9734,23 +9727,9 @@ async function gerarPDFComJsPDF(result) {
             <input id="esp_horas_desmontagem" type="number" min="0" placeholder="Ex: 3" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
           </div>
 
-          <div>
-            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Jornada Vigilante — Desmontagem</label>
-            <select id="esp_horas_vig_desmontagem" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
-              <option value="6">6 horas — R$ 261,00/vig</option>
-              <option value="8">8 horas — R$ 344,50/vig</option>
-              <option value="12">12 horas — R$ 518,00/vig</option>
-            </select>
-          </div>
 
-          <div style="grid-column:1/-1;">
-            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Jornada Vigilante — Evento</label>
-            <select id="esp_horas_vig_evento" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
-              <option value="12">12 horas — R$ 518,00/vig</option>
-              <option value="8">8 horas — R$ 344,50/vig</option>
-              <option value="6">6 horas — R$ 261,00/vig</option>
-            </select>
-          </div>
+
+
 
         </div>
       </div>
