@@ -1621,6 +1621,108 @@ label {
 ::-webkit-scrollbar-thumb { background: rgba(46,109,164,0.4); border-radius: 3px; }
 </style>
 
+
+<style id="force-white-text">
+/* Forçar texto branco em todos os modais */
+#dadosModal *, #adminModal *, #modalEspecialista *, #modalPowerBI * {
+    color: #e2e8f0;
+}
+#dadosModal h1, #dadosModal h2, #dadosModal h3,
+#dadosModal h4, #dadosModal h5, #dadosModal h6,
+#adminModal h1, #adminModal h2, #adminModal h3,
+#adminModal h4, #adminModal h5, #adminModal h6,
+#modalEspecialista h1, #modalEspecialista h2, #modalEspecialista h3,
+#modalPowerBI h1, #modalPowerBI h2, #modalPowerBI h3 {
+    color: #ffffff !important;
+}
+#dadosModal p, #dadosModal span, #dadosModal label,
+#dadosModal td, #dadosModal li, #dadosModal div,
+#adminModal p, #adminModal span, #adminModal label,
+#adminModal td, #adminModal li, #adminModal div,
+#modalEspecialista p, #modalEspecialista span, #modalEspecialista label,
+#modalEspecialista td, #modalEspecialista li {
+    color: #e2e8f0 !important;
+}
+/* Placeholder dos inputs */
+#dadosModal input::placeholder,
+#adminModal input::placeholder,
+#modalEspecialista input::placeholder,
+#modalEspecialista textarea::placeholder {
+    color: rgba(148,163,184,0.5) !important;
+}
+/* Títulos dos headers dos modais */
+.modal-header h2 { color: #ffffff !important; font-size: 18px !important; }
+/* Títulos do Especialista igual ao tamanho do header */
+#modalEspecialista .modal-header h2,
+#adminModal .modal-header h2,
+#dadosModal .modal-header h2 {
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+}
+/* Subtítulos e labels das seções */
+.sidebar-section-label, [style*="letter-spacing:1.5px"] { color: rgba(100,116,139,0.8) !important; }
+/* Inputs e selects */
+#dadosModal input, #dadosModal select, #dadosModal textarea,
+#adminModal input, #adminModal select, #adminModal textarea,
+#modalEspecialista input, #modalEspecialista select, #modalEspecialista textarea {
+    color: #e2e8f0 !important;
+    background: rgba(255,255,255,0.05) !important;
+    border: 1px solid rgba(46,109,164,0.3) !important;
+}
+/* Botões de ação */
+.action-btn, .btn-primary, .btn-success, .btn-danger,
+button[onclick*="save"], button[onclick*="add"], button[onclick*="delete"] {
+    background: linear-gradient(135deg, #1B3A5C, #2E6DA4) !important;
+    color: #ffffff !important;
+    border: none !important;
+}
+/* Pendências badge */
+.pending-item { background: #0d1b2a !important; border-color: rgba(46,109,164,0.2) !important; }
+.pending-item * { color: #e2e8f0 !important; }
+/* Tabs */
+.tab-btn { color: rgba(148,163,184,0.8) !important; }
+.tab-btn.active { color: #ffffff !important; }
+/* Stat cards */
+.stat-card * { color: #e2e8f0 !important; }
+.stat-number { color: #93c5fd !important; font-size: 32px !important; font-weight: 700 !important; }
+</style>
+
+
+<style id="dados-nav-css">
+.dados-nav {
+    width: 100%;
+    padding: 9px 12px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(148,163,184,0.85);
+    text-align: left;
+    background: transparent;
+    transition: all 0.2s ease;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.dados-nav:hover {
+    background: rgba(46,109,164,0.15);
+    color: #e2e8f0;
+}
+.dados-nav.active {
+    background: rgba(46,109,164,0.25);
+    color: #93c5fd;
+    font-weight: 600;
+    border-left: 2px solid #2E6DA4;
+}
+/* Fechar a div extra do conteúdo */
+</style>
+
 </head>
 <body>
     <!-- Verificação de autenticação -->
@@ -1729,14 +1831,11 @@ label {
                 <h2>⚙️ Painel do Gestor de Segurança</h2>
                 <button class="close-btn" onclick="closeAdminPanel()">×</button>
             </div>
-            <div class="modal-body">
-                <div id="successMessage" class="success-message">✅ Operação realizada com sucesso!</div>
-                <div class="info-banner">
-                    <strong>📌 Clube A Hebraica - Departamento de Segurança</strong>
-                    <p>Configure aqui todos os procedimentos operacionais da equipe de segurança.</p>
-                </div>
-                <div class="tabs">
-                    <button class="tab active" onclick="switchTab('add')">➕ Adicionar Procedimento</button>
+            <div class="modal-body" style="padding:0;display:flex;overflow:hidden;">
+                <!-- SIDEBAR PAINEL -->
+                <div style="width:210px;min-width:210px;background:linear-gradient(180deg,#080f1a 0%,#0d1b2a 100%);border-right:1px solid rgba(46,109,164,0.2);display:flex;flex-direction:column;padding:12px 8px;">
+                    <div style="font-size:9px;font-weight:700;color:rgba(100,116,139,0.6);letter-spacing:2px;text-transform:uppercase;padding:6px 8px 8px;">Configurações</div>
+                    <button class="dados-nav active" onclick="switchTab('add');setAdminNav(this)">➕ Adicionar Procedimento</button>
                     <button class="tab" onclick="switchTab('shortcuts')">⚡ Configurar Atalhos</button>
                     <button class="tab" onclick="switchTab('logos')">🎨 Logos</button>
                     <button class="tab" onclick="switchTab('backup')">💾 Backup/Restaurar</button>
@@ -8682,20 +8781,25 @@ async function gerarPDFComJsPDF(result) {
                 <h2>📊 Dados Operacionais</h2>
                 <button class="close-btn" onclick="closeDados()">×</button>
             </div>
-            <div class="modal-body">
-                <div class="tabs">
-                    <button class="tab active" onclick="switchDadosTab('ocorrencias')">📋 Ocorrências</button>
-                    <button class="tab" onclick="switchDadosTab('briefing')">📝 Briefing</button>
-                    <button class="tab" onclick="switchDadosTab('eventos')">🎉 Eventos</button>
-                    <button class="tab" onclick="switchDadosTab('radios')">📻 Rádios</button>
-                    <button class="tab" onclick="switchDadosTab('numeral')">📊 Numeral Portarias</button>
-                    <button class="tab" onclick="switchDadosTab('manutencoes')">🔧 Manutenções</button>
-                    <button class="tab" onclick="switchDadosTab('checklist')">✅ Checklist Central</button>
-                    <button class="tab" onclick="switchDadosTab('chaves')">🔑 Controle Chaves</button>
-                    <button class="tab" onclick="switchDadosTab('historico')">📜 Histórico Chaves</button>
-                    <button class="tab" onclick="switchDadosTab('imagem')">📸 Solicitação Imagem</button>
-                    <button class="tab" onclick="switchDadosTab('export')">📥 Export PBI</button>
+            <div class="modal-body" style="padding:0; display:flex; overflow:hidden;">
+                <!-- SIDEBAR DADOS -->
+                <div style="width:210px;min-width:210px;background:linear-gradient(180deg,#080f1a 0%,#0d1b2a 100%);border-right:1px solid rgba(46,109,164,0.2);display:flex;flex-direction:column;overflow-y:auto;padding:12px 8px;">
+                    <div style="font-size:9px;font-weight:700;color:rgba(100,116,139,0.6);letter-spacing:2px;text-transform:uppercase;padding:6px 8px 8px;">Seções</div>
+                    <button class="dados-nav active" onclick="switchDadosTab('ocorrencias');setDadosNav(this)">📋 Ocorrências</button>
+                    <button class="dados-nav" onclick="switchDadosTab('briefing');setDadosNav(this)">📝 Briefing</button>
+                    <button class="dados-nav" onclick="switchDadosTab('eventos');setDadosNav(this)">🎉 Eventos</button>
+                    <button class="dados-nav" onclick="switchDadosTab('radios');setDadosNav(this)">📻 Rádios</button>
+                    <button class="dados-nav" onclick="switchDadosTab('numeral');setDadosNav(this)">📊 Numeral Portarias</button>
+                    <button class="dados-nav" onclick="switchDadosTab('manutencoes');setDadosNav(this)">🔧 Manutenções</button>
+                    <button class="dados-nav" onclick="switchDadosTab('checklist');setDadosNav(this)">✅ Checklist Central</button>
+                    <button class="dados-nav" onclick="switchDadosTab('chaves');setDadosNav(this)">🔑 Controle Chaves</button>
+                    <button class="dados-nav" onclick="switchDadosTab('historico');setDadosNav(this)">📜 Histórico Chaves</button>
+                    <button class="dados-nav" onclick="switchDadosTab('imagem');setDadosNav(this)">📸 Solicitação Imagem</button>
+                    <button class="dados-nav" onclick="switchDadosTab('export');setDadosNav(this)">📥 Export PBI</button>
                 </div>
+                <!-- CONTEÚDO DADOS -->
+                <div style="flex:1;overflow-y:auto;padding:20px;background:#060d18;">
+                <div class="tabs" style="display:none;">
 
                 <div class="tab-content active" id="ocorrenciasTab">
                     <h3 style="margin-bottom:20px;color:#1e293b;">📋 Ocorrências</h3>
@@ -10100,7 +10204,7 @@ async function gerarEspecialista() {
 
       <div style="font-size:11px;color:rgba(100,116,139,0.6);margin-bottom:4px;letter-spacing:0.5px;">Selecione o relatório para abrir:</div>
 
-      <a href="https://redgastronomiacombr-my.sharepoint.com/:u:/g/personal/daniel_redgastronomia_com_br/IQAqst595fhsQYUghg9nZvDmATJE-hBYUHLOXDGeKuZORO8?e=Epm0ZW" target="_blank" onclick="fecharPowerBI()" style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.2);border-radius:10px;text-decoration:none;transition:all 0.2s;cursor:pointer;" onmouseover="this.style.background='rgba(46,109,164,0.12)';this.style.borderColor='rgba(46,109,164,0.45)'" onmouseout="this.style.background='rgba(255,255,255,0.04)';this.style.borderColor='rgba(46,109,164,0.2)'">
+      <a href="https://redgastronomiacombr-my.sharepoint.com/:u:/g/personal/daniel_redgastronomia_com_br/IQAqst595fhsQYUghg9nZvDmATJE-hBYUHLOXDGeKuZORO8?e=hqq8sY" target="_blank" onclick="fecharPowerBI()" style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.2);border-radius:10px;text-decoration:none;transition:all 0.2s;cursor:pointer;" onmouseover="this.style.background='rgba(46,109,164,0.12)';this.style.borderColor='rgba(46,109,164,0.45)'" onmouseout="this.style.background='rgba(255,255,255,0.04)';this.style.borderColor='rgba(46,109,164,0.2)'">
         <div style="width:40px;height:40px;background:linear-gradient(135deg,#1B3A5C,#2E6DA4);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">📊</div>
         <div>
           <div style="color:#e2e8f0;font-size:13px;font-weight:600;">Assessment 2026</div>
@@ -10109,7 +10213,7 @@ async function gerarEspecialista() {
         <div style="margin-left:auto;color:rgba(46,109,164,0.7);font-size:14px;">↗</div>
       </a>
 
-      <a href="https://redgastronomiacombr-my.sharepoint.com/:u:/g/personal/daniel_redgastronomia_com_br/IQCohgy43LELTLWDj8NBZkMRAcy87dzsh7Tdnviz4jcBJvM?e=IcLACb" target="_blank" onclick="fecharPowerBI()" style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.2);border-radius:10px;text-decoration:none;transition:all 0.2s;cursor:pointer;" onmouseover="this.style.background='rgba(46,109,164,0.12)';this.style.borderColor='rgba(46,109,164,0.45)'" onmouseout="this.style.background='rgba(255,255,255,0.04)';this.style.borderColor='rgba(46,109,164,0.2)'">
+      <a href="https://redgastronomiacombr-my.sharepoint.com/:u:/g/personal/daniel_redgastronomia_com_br/IQCohgy43LELTLWDj8NBZkMRAcy87dzsh7Tdnviz4jcBJvM?e=8NfAFm" target="_blank" onclick="fecharPowerBI()" style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.2);border-radius:10px;text-decoration:none;transition:all 0.2s;cursor:pointer;" onmouseover="this.style.background='rgba(46,109,164,0.12)';this.style.borderColor='rgba(46,109,164,0.45)'" onmouseout="this.style.background='rgba(255,255,255,0.04)';this.style.borderColor='rgba(46,109,164,0.2)'">
         <div style="width:40px;height:40px;background:linear-gradient(135deg,#1B3A5C,#2E6DA4);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">📅</div>
         <div>
           <div style="color:#e2e8f0;font-size:13px;font-weight:600;">Infos Eventos 2026</div>
@@ -10118,7 +10222,7 @@ async function gerarEspecialista() {
         <div style="margin-left:auto;color:rgba(46,109,164,0.7);font-size:14px;">↗</div>
       </a>
 
-      <a href="https://redgastronomiacombr-my.sharepoint.com/:u:/g/personal/daniel_redgastronomia_com_br/IQAPQoiacS-zTp-7aR_AJ-KiAZbL0LW7knGy1xl0sL_mv8I?e=c3HIEO" target="_blank" onclick="fecharPowerBI()" style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.2);border-radius:10px;text-decoration:none;transition:all 0.2s;cursor:pointer;" onmouseover="this.style.background='rgba(46,109,164,0.12)';this.style.borderColor='rgba(46,109,164,0.45)'" onmouseout="this.style.background='rgba(255,255,255,0.04)';this.style.borderColor='rgba(46,109,164,0.2)'">
+      <a href="https://redgastronomiacombr-my.sharepoint.com/:u:/g/personal/daniel_redgastronomia_com_br/IQAPQoiacS-zTp-7aR_AJ-KiAZbL0LW7knGy1xl0sL_mv8I?e=xv9yR3" target="_blank" onclick="fecharPowerBI()" style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.2);border-radius:10px;text-decoration:none;transition:all 0.2s;cursor:pointer;" onmouseover="this.style.background='rgba(46,109,164,0.12)';this.style.borderColor='rgba(46,109,164,0.45)'" onmouseout="this.style.background='rgba(255,255,255,0.04)';this.style.borderColor='rgba(46,109,164,0.2)'">
         <div style="width:40px;height:40px;background:linear-gradient(135deg,#1B3A5C,#2E6DA4);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🔧</div>
         <div>
           <div style="color:#e2e8f0;font-size:13px;font-weight:600;">Manutenções 2026</div>
@@ -10127,7 +10231,7 @@ async function gerarEspecialista() {
         <div style="margin-left:auto;color:rgba(46,109,164,0.7);font-size:14px;">↗</div>
       </a>
 
-      <a href="https://redgastronomiacombr-my.sharepoint.com/:u:/g/personal/daniel_redgastronomia_com_br/IQB_H1SNG5A7SZB3uYbLT3nOASnNw6xa4TUmNXz_BjTVOyw?e=s2EYcw" target="_blank" onclick="fecharPowerBI()" style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.2);border-radius:10px;text-decoration:none;transition:all 0.2s;cursor:pointer;" onmouseover="this.style.background='rgba(46,109,164,0.12)';this.style.borderColor='rgba(46,109,164,0.45)'" onmouseout="this.style.background='rgba(255,255,255,0.04)';this.style.borderColor='rgba(46,109,164,0.2)'">
+      <a href="https://redgastronomiacombr-my.sharepoint.com/:u:/g/personal/daniel_redgastronomia_com_br/IQB_H1SNG5A7SZB3uYbLT3nOASnNw6xa4TUmNXz_BjTVOyw?e=So1AGe" target="_blank" onclick="fecharPowerBI()" style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.2);border-radius:10px;text-decoration:none;transition:all 0.2s;cursor:pointer;" onmouseover="this.style.background='rgba(46,109,164,0.12)';this.style.borderColor='rgba(46,109,164,0.45)'" onmouseout="this.style.background='rgba(255,255,255,0.04)';this.style.borderColor='rgba(46,109,164,0.2)'">
         <div style="width:40px;height:40px;background:linear-gradient(135deg,#1B3A5C,#2E6DA4);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🔢</div>
         <div>
           <div style="color:#e2e8f0;font-size:13px;font-weight:600;">Numeral 2026</div>
@@ -10136,7 +10240,7 @@ async function gerarEspecialista() {
         <div style="margin-left:auto;color:rgba(46,109,164,0.7);font-size:14px;">↗</div>
       </a>
 
-      <a href="https://redgastronomiacombr-my.sharepoint.com/:u:/g/personal/daniel_redgastronomia_com_br/IQDX9PpPJb1xR4R4u7iotUo6AY8XSzlLy14ADkGfukMo4p8?e=cS4IAj" target="_blank" onclick="fecharPowerBI()" style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.2);border-radius:10px;text-decoration:none;transition:all 0.2s;cursor:pointer;" onmouseover="this.style.background='rgba(46,109,164,0.12)';this.style.borderColor='rgba(46,109,164,0.45)'" onmouseout="this.style.background='rgba(255,255,255,0.04)';this.style.borderColor='rgba(46,109,164,0.2)'">
+      <a href="https://redgastronomiacombr-my.sharepoint.com/:u:/g/personal/daniel_redgastronomia_com_br/IQDX9PpPJb1xR4R4u7iotUo6AY8XSzlLy14ADkGfukMo4p8?e=PmcJud" target="_blank" onclick="fecharPowerBI()" style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.2);border-radius:10px;text-decoration:none;transition:all 0.2s;cursor:pointer;" onmouseover="this.style.background='rgba(46,109,164,0.12)';this.style.borderColor='rgba(46,109,164,0.45)'" onmouseout="this.style.background='rgba(255,255,255,0.04)';this.style.borderColor='rgba(46,109,164,0.2)'">
         <div style="width:40px;height:40px;background:linear-gradient(135deg,#1B3A5C,#2E6DA4);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">⚠️</div>
         <div>
           <div style="color:#e2e8f0;font-size:13px;font-weight:600;">Ocorrências 2026</div>
@@ -10163,6 +10267,18 @@ function abrirPowerBI() {
 function fecharPowerBI() {
     document.getElementById('modalPowerBI').style.display = 'none';
     document.body.style.overflow = '';
+}
+</script>
+
+
+<script>
+function setDadosNav(btn) {
+    document.querySelectorAll('#dadosModal .dados-nav').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+}
+function setAdminNav(btn) {
+    document.querySelectorAll('#adminModal .dados-nav').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
 }
 </script>
 
