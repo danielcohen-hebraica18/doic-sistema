@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verificação de Prestadores — Polícia</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:#060d18;color:#e2e8f0;min-height:100vh;}
+.header{background:linear-gradient(135deg,#080f1a,#0d1b2a);border-bottom:1px solid rgba(46,109,164,0.3);padding:20px 28px;text-align:center;}
+.header h1{font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;color:#e2e8f0;letter-spacing:1.5px;text-transform:uppercase;}
+.header p{font-size:12px;color:rgba(148,163,184,0.6);margin-top:4px;}
+.content{padding:28px;max-width:700px;margin:0 auto;}
+.card{background:#0d1b2a;border:1px solid rgba(46,109,164,0.2);border-radius:12px;padding:24px;margin-bottom:20px;}
+.card-title{font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;color:#93c5fd;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;}
+.prestador-item{background:#080f1a;border:1px solid rgba(46,109,164,0.15);border-radius:10px;padding:16px;margin-bottom:14px;}
+.prestador-nome{font-size:15px;font-weight:700;color:#e2e8f0;margin-bottom:6px;}
+.prestador-info{font-size:12px;color:rgba(148,163,184,0.7);margin-bottom:14px;}
+.resposta-btns{display:flex;gap:10px;margin-bottom:10px;}
+.btn-aprovado{flex:1;padding:12px;background:linear-gradient(135deg,#14532d,#16a34a);color:white;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;}
+.btn-negado{flex:1;padding:12px;background:linear-gradient(135deg,#7f1d1d,#dc2626);color:white;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;}
+.btn-aprovado:hover{filter:brightness(1.15);}
+.btn-negado:hover{filter:brightness(1.15);}
+.btn-aprovado.selected{box-shadow:0 0 0 3px rgba(22,163,74,0.5);transform:scale(1.02);}
+.btn-negado.selected{box-shadow:0 0 0 3px rgba(220,38,38,0.5);transform:scale(1.02);}
+.obs-input{width:100%;padding:8px 12px;background:rgba(255,255,255,0.05);border:1px solid rgba(46,109,164,0.2);border-radius:8px;color:#e2e8f0;font-size:12px;font-family:'Inter',sans-serif;resize:none;}
+.obs-input::placeholder{color:rgba(100,116,139,0.5);}
+.btn-enviar{width:100%;padding:14px;background:linear-gradient(135deg,#1B3A5C,#2E6DA4);color:white;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Rajdhani',sans-serif;letter-spacing:1px;text-transform:uppercase;transition:all 0.2s;margin-top:8px;}
+.btn-enviar:hover{filter:brightness(1.15);}
+.btn-enviar:disabled{opacity:0.5;cursor:not-allowed;}
+.alert{padding:14px 18px;border-radius:8px;margin-bottom:16px;font-size:13px;}
+.alert-error{background:rgba(220,38,38,0.1);border:1px solid rgba(220,38,38,0.3);color:#fca5a5;}
+.alert-success{background:rgba(22,163,74,0.1);border:1px solid rgba(22,163,74,0.3);color:#86efac;}
+.alert-info{background:rgba(46,109,164,0.1);border:1px solid rgba(46,109,164,0.3);color:#93c5fd;}
+.spinner{width:20px;height:20px;border:2px solid rgba(46,109,164,0.3);border-top-color:#2E6DA4;border-radius:50%;animation:spin 0.8s linear infinite;display:inline-block;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.status-selected{display:none;font-size:12px;font-weight:700;margin-top:6px;}
+</style>
+</head>
+<body>
+
+<div class="header">
+    <h1>🛡️ Clube A Hebraica — Verificação de Prestadores</h1>
+    <p>Departamento de Segurança Institucional</p>
+</div>
+
+<div class="content">
+    <div id="msg-area"></div>
+    <div id="main-content">
+        <div style="text-align:center;padding:40px;color:rgba(148,163,184,0.5);">
+            <div class="spinner"></div>
+            <p style="margin-top:12px;">Carregando prestadores...</p>
+        </div>
+    </div>
+</div>
+
+<script>
+const RAILWAY_URL = 'https://web-production-f8165.up.railway.app';
+const params = new URLSearchParams(window.location.search);
+const token  = params.get('token');
+
+let prestadores = [];
+let respostas   = {};
+
+async function carregar() {
+    if (!token) {
+        document.getElementById('main-content').innerHTML =
+            '<div class="alert alert-error">❌ Link inválido. Token não encontrado.</div>';
+        return;
+    }
+
+    try {
+        const resp = await fetch(`${RAILWAY_URL}/checagem/lote/${token}`);
+        const data = await resp.json();
+        prestadores = data.prestadores || [];
+
+        if (prestadores.length === 0) {
+            document.getElementById('main-content').innerHTML =
+                '<div class="alert alert-info">ℹ️ Nenhum prestador encontrado para este link. Pode já ter sido respondido.</div>';
+            return;
+        }
+
+        // Verificar se já foram todos respondidos
+        const pendentes = prestadores.filter(p => p.Status === 'Pendente' || !p.Status);
+        if (pendentes.length === 0) {
+            document.getElementById('main-content').innerHTML =
+                '<div class="alert alert-success">✅ Todos os prestadores desta solicitação já foram verificados. Obrigado!</div>';
+            return;
+        }
+
+        renderPrestadores(pendentes);
+    } catch(e) {
+        document.getElementById('main-content').innerHTML =
+            `<div class="alert alert-error">❌ Erro ao carregar: ${e.message}</div>`;
+    }
+}
+
+function renderPrestadores(lista) {
+    const depto = lista[0]?.Departamento || '';
+    const items = lista.map((p, i) => `
+        <div class="prestador-item" id="item-${i}">
+            <div class="prestador-nome">${p.Nome_Completo || ''}</div>
+            <div class="prestador-info">
+                ${p.CPF ? `CPF: ${p.CPF}` : ''}
+                ${p.CPF && p.RG ? ' &nbsp;|&nbsp; ' : ''}
+                ${p.RG ? `RG: ${p.RG}` : ''}
+            </div>
+            <div class="resposta-btns">
+                <button class="btn-aprovado" onclick="selecionarStatus(${i}, '${p.id}', 'Aprovado', this)">
+                    ✅ APROVADO
+                </button>
+                <button class="btn-negado" onclick="selecionarStatus(${i}, '${p.id}', 'Negado', this)">
+                    ❌ NEGADO
+                </button>
+            </div>
+            <div class="status-selected" id="status-${i}"></div>
+            <textarea class="obs-input" id="obs-${i}" rows="2" placeholder="Observações (opcional)..."></textarea>
+        </div>
+    `).join('');
+
+    document.getElementById('main-content').innerHTML = `
+        <div class="card">
+            <div class="card-title">📋 Departamento: ${depto}</div>
+            <div style="font-size:12px;color:rgba(148,163,184,0.6);margin-bottom:20px;">
+                ${lista.length} prestador(es) aguardando verificação.<br>
+                Selecione <strong>APROVADO</strong> ou <strong>NEGADO</strong> para cada um.
+            </div>
+            ${items}
+        </div>
+        <button class="btn-enviar" onclick="enviarRespostas()" id="btn-enviar">
+            📧 Enviar Verificações e Notificar Departamento
+        </button>
+        <div id="msg-envio" style="margin-top:12px;"></div>
+    `;
+}
+
+function selecionarStatus(idx, recordId, status, btn) {
+    // Armazenar resposta
+    respostas[recordId] = { id: recordId, status };
+
+    // Visual
+    const item = document.getElementById(`item-${idx}`);
+    item.querySelectorAll('.btn-aprovado,.btn-negado').forEach(b => {
+        b.classList.remove('selected');
+    });
+    btn.classList.add('selected');
+
+    const statusEl = document.getElementById(`status-${idx}`);
+    statusEl.style.display = 'block';
+    statusEl.style.color = status === 'Aprovado' ? '#86efac' : '#fca5a5';
+    statusEl.textContent = status === 'Aprovado' ? '✅ Marcado como APROVADO' : '❌ Marcado como NEGADO';
+}
+
+async function enviarRespostas() {
+    const pendentes = prestadores.filter(p => p.Status === 'Pendente' || !p.Status);
+
+    if (Object.keys(respostas).length < pendentes.length) {
+        document.getElementById('msg-envio').innerHTML =
+            '<div class="alert alert-error">⚠️ Responda todos os prestadores antes de enviar.</div>';
+        return;
+    }
+
+    const btn = document.getElementById('btn-enviar');
+    btn.disabled = true;
+    btn.innerHTML = '<span style="display:inline-flex;align-items:center;justify-content:center;gap:10px;"><div class="spinner"></div> Enviando...</span>';
+
+    // Adicionar observações
+    const lista = Object.entries(respostas).map(([id, r]) => {
+        const idx = pendentes.findIndex(p => p.id === id);
+        return { ...r, obs: idx >= 0 ? (document.getElementById(`obs-${idx}`)?.value || '') : '' };
+    });
+
+    try {
+        const resp = await fetch(`${RAILWAY_URL}/checagem/responder`, {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({ respostas: lista, token_lote: token })
+        });
+        const data = await resp.json();
+
+        if (data.ok) {
+            document.getElementById('main-content').innerHTML = `
+                <div class="card" style="text-align:center;padding:40px;">
+                    <div style="font-size:48px;margin-bottom:16px;">✅</div>
+                    <h2 style="color:#86efac;font-family:'Rajdhani',sans-serif;font-size:22px;margin-bottom:12px;">
+                        Verificação Concluída!
+                    </h2>
+                    <p style="color:rgba(148,163,184,0.7);">
+                        ${data.respondidos} prestador(es) verificado(s).<br>
+                        O departamento foi notificado automaticamente por e-mail.<br>
+                        Uma cópia foi enviada para a Segurança do Clube.
+                    </p>
+                    <p style="color:rgba(100,116,139,0.5);font-size:12px;margin-top:20px;">
+                        Obrigado, Mauricio. Pode fechar esta janela.
+                    </p>
+                </div>`;
+        } else {
+            document.getElementById('msg-envio').innerHTML =
+                `<div class="alert alert-error">❌ Erro: ${data.error}</div>`;
+            btn.disabled = false;
+            btn.innerHTML = '📧 Enviar Verificações e Notificar Departamento';
+        }
+    } catch(e) {
+        document.getElementById('msg-envio').innerHTML =
+            `<div class="alert alert-error">❌ Erro de conexão: ${e.message}</div>`;
+        btn.disabled = false;
+        btn.innerHTML = '📧 Enviar Verificações e Notificar Departamento';
+    }
+}
+
+carregar();
+</script>
+</body>
+</html>
