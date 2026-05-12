@@ -174,8 +174,38 @@ body{font-family:'Inter',sans-serif;background:#060d18;color:#e2e8f0;min-height:
 
 <!-- ═══ TAB 3: RELATÓRIOS ═══ -->
 <div id="tab-relatorios" class="content" style="display:none;">
+
+    <!-- Filtros de período -->
+    <div class="card">
+        <div class="card-title">🗓️ Filtros do Relatório</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:14px;align-items:end;">
+            <div class="form-group">
+                <label>Data Início</label>
+                <input type="date" id="rel-data-ini">
+            </div>
+            <div class="form-group">
+                <label>Data Fim</label>
+                <input type="date" id="rel-data-fim">
+            </div>
+            <div class="form-group">
+                <label>Departamento (opcional)</label>
+                <select id="rel-depto">
+                    <option value="">Todos os departamentos</option>
+                </select>
+            </div>
+            <div style="display:flex;gap:8px;padding-bottom:1px;">
+                <button class="btn btn-primary" onclick="carregarStats()">🔍 Gerar</button>
+                <button class="btn btn-success" onclick="exportarXLS()" id="btn-exportar" style="display:none;">
+                    📥 Baixar XLS
+                </button>
+            </div>
+        </div>
+    </div>
+
     <div id="stats-container">
-        <div class="loading"><div class="spinner"></div> Carregando estatísticas...</div>
+        <div style="text-align:center;padding:40px;color:rgba(148,163,184,0.4);font-size:13px;">
+            Selecione o período e clique em Gerar
+        </div>
     </div>
 </div>
 
@@ -191,7 +221,7 @@ const DEPTOS = [
 ];
 
 // Preencher selects de depto
-document.querySelectorAll('#depto, #filtro-depto').forEach(sel => {
+document.querySelectorAll('#depto, #filtro-depto, #rel-depto').forEach(sel => {
     DEPTOS.forEach(d => {
         const opt = document.createElement('option');
         opt.value = d; opt.textContent = d;
@@ -360,47 +390,133 @@ async function carregarConsulta() {
 }
 
 // ── TAB 3: RELATÓRIOS ────────────────────────────────────────────────────────
+function formatarDataParam(dateInput) {
+    if (!dateInput) return '';
+    const [y, m, d] = dateInput.split('-');
+    return `${d}/${m}/${y}`;
+}
+
 async function carregarStats() {
+    const div = document.getElementById('stats-container');
+    div.innerHTML = '<div class="loading"><div class="spinner"></div> Gerando relatório...</div>';
+
+    const dataIni = document.getElementById('rel-data-ini').value;
+    const dataFim = document.getElementById('rel-data-fim').value;
+    const depto   = document.getElementById('rel-depto').value;
+
+    let params = new URLSearchParams();
+    if (dataIni) params.set('data_ini', formatarDataParam(dataIni));
+    if (dataFim) params.set('data_fim', formatarDataParam(dataFim));
+    if (depto)   params.set('depto', depto);
+
     try {
-        const resp = await fetch(`${RAILWAY_URL}/checagem/stats`);
+        const resp = await fetch(`${RAILWAY_URL}/checagem/todos?${params}`);
         const data = await resp.json();
-        const div  = document.getElementById('stats-container');
+        const regs = data.registros || [];
 
-        // Stats principais
-        const total = data.total || 0;
-        const maximo = Math.max(...Object.values(data.por_departamento || {}).map(d => d.total), 1);
+        if (regs.length === 0) {
+            div.innerHTML = '<div class="alert alert-info">Nenhum registro encontrado para o período selecionado.</div>';
+            document.getElementById('btn-exportar').style.display = 'none';
+            return;
+        }
 
-        // Barras por depto
-        const barras = Object.entries(data.por_departamento || {})
+        // Agrupar por depto
+        const porDepto = {};
+        regs.forEach(r => {
+            const d = r.Departamento || 'Outro';
+            if (!porDepto[d]) porDepto[d] = {total:0,aprovados:0,negados:0,pendentes:0};
+            porDepto[d].total++;
+            if (r.Status === 'Aprovado') porDepto[d].aprovados++;
+            else if (r.Status === 'Negado') porDepto[d].negados++;
+            else porDepto[d].pendentes++;
+        });
+
+        const total     = regs.length;
+        const aprovados = regs.filter(r => r.Status === 'Aprovado').length;
+        const negados   = regs.filter(r => r.Status === 'Negado').length;
+        const pendentes = regs.filter(r => r.Status === 'Pendente').length;
+        const maximo    = Math.max(...Object.values(porDepto).map(d => d.total), 1);
+
+        // Período
+        const periodo = dataIni || dataFim
+            ? `${formatarDataParam(dataIni) || 'início'} a ${formatarDataParam(dataFim) || 'hoje'}`
+            : 'Todo o período';
+
+        // Tabela por depto
+        const rows = Object.entries(porDepto)
             .sort((a,b) => b[1].total - a[1].total)
             .map(([d, s]) => {
-                const pct = Math.round((s.total / maximo) * 100);
-                return `<div style="margin-bottom:10px;">
-                    <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
-                        <span style="font-size:12px;color:#e2e8f0;">${d}</span>
-                        <span style="font-size:12px;color:rgba(148,163,184,0.6);">${s.total} | ✅${s.aprovados} ❌${s.negados} ⏳${s.pendentes}</span>
-                    </div>
-                    <div style="background:#080f1a;border-radius:6px;overflow:hidden;">
-                        <div style="height:20px;width:${pct}%;background:linear-gradient(90deg,#1B3A5C,#2E6DA4);border-radius:6px;min-width:${s.total>0?'20px':'0'};"></div>
-                    </div>
-                </div>`;
+                const pct = s.total > 0 ? Math.round(s.aprovados/s.total*100) : 0;
+                const w   = Math.round((s.total/maximo)*100);
+                return `<tr>
+                    <td style="font-weight:600;">${d}</td>
+                    <td style="text-align:center;">${s.total}</td>
+                    <td style="text-align:center;color:#86efac;">✅ ${s.aprovados}</td>
+                    <td style="text-align:center;color:#fca5a5;">❌ ${s.negados}</td>
+                    <td style="text-align:center;color:#fcd34d;">⏳ ${s.pendentes}</td>
+                    <td style="text-align:center;">${pct}%</td>
+                    <td style="padding:6px 12px;">
+                        <div style="background:#080f1a;border-radius:4px;overflow:hidden;height:14px;">
+                            <div style="height:14px;width:${w}%;background:linear-gradient(90deg,#1B3A5C,#2E6DA4);border-radius:4px;"></div>
+                        </div>
+                    </td>
+                </tr>`;
             }).join('');
 
         div.innerHTML = `
+            <div style="font-size:12px;color:rgba(148,163,184,0.5);margin-bottom:16px;">📅 ${periodo} · ${total} registro(s)</div>
             <div class="stats-grid">
                 <div class="stat-card"><div class="stat-num">${total}</div><div class="stat-lbl">Total Checados</div></div>
-                <div class="stat-card"><div class="stat-num" style="color:#86efac;">${data.aprovados||0}</div><div class="stat-lbl">Aprovados</div></div>
-                <div class="stat-card"><div class="stat-num" style="color:#fca5a5;">${data.negados||0}</div><div class="stat-lbl">Negados</div></div>
-                <div class="stat-card"><div class="stat-num" style="color:#fcd34d;">${data.pendentes||0}</div><div class="stat-lbl">Pendentes</div></div>
+                <div class="stat-card"><div class="stat-num" style="color:#86efac;">${aprovados}</div><div class="stat-lbl">Aprovados</div></div>
+                <div class="stat-card"><div class="stat-num" style="color:#fca5a5;">${negados}</div><div class="stat-lbl">Negados</div></div>
+                <div class="stat-card"><div class="stat-num" style="color:#fcd34d;">${pendentes}</div><div class="stat-lbl">Pendentes</div></div>
             </div>
             <div class="card">
                 <div class="card-title">📊 Checagens por Departamento</div>
-                ${barras || '<p style="color:rgba(148,163,184,0.5);">Sem dados ainda.</p>'}
+                <div style="overflow-x:auto;">
+                <table class="prestadores-table">
+                    <thead><tr>
+                        <th>Departamento</th><th>Total</th><th>Aprovados</th>
+                        <th>Negados</th><th>Pendentes</th><th>% Aprov.</th><th>Proporção</th>
+                    </tr></thead>
+                    <tbody>${rows}</tbody>
+                </table>
+                </div>
             </div>`;
+
+        document.getElementById('btn-exportar').style.display = 'flex';
+
     } catch(e) {
-        document.getElementById('stats-container').innerHTML =
-            `<div class="alert alert-error">Erro ao carregar: ${e.message}</div>`;
+        div.innerHTML = `<div class="alert alert-error">Erro: ${e.message}</div>`;
     }
+}
+
+function exportarXLS() {
+    const dataIni = document.getElementById('rel-data-ini').value;
+    const dataFim = document.getElementById('rel-data-fim').value;
+    const depto   = document.getElementById('rel-depto').value;
+
+    let params = new URLSearchParams();
+    if (dataIni) params.set('data_ini', formatarDataParam(dataIni));
+    if (dataFim) params.set('data_fim', formatarDataParam(dataFim));
+    if (depto)   params.set('depto', depto);
+
+    const btn = document.getElementById('btn-exportar');
+    btn.innerHTML = '⏳ Gerando XLS...';
+    btn.disabled = true;
+
+    const url = `${RAILWAY_URL}/checagem/exportar?${params}`;
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'Checagem_Hebraica.xlsx';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    setTimeout(() => {
+        btn.innerHTML = '📥 Baixar XLS';
+        btn.disabled = false;
+    }, 3000);
 }
 
 // ── NAVEGAÇÃO ─────────────────────────────────────────────────────────────────
