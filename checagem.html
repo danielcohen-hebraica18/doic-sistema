@@ -275,6 +275,23 @@ function maskCPF(input) {
     input.value = v.slice(0,14);
 }
 
+// Verificar parâmetros da URL (login via sistema principal)
+const urlParams = new URLSearchParams(window.location.search);
+const deptoParam = urlParams.get('depto');
+const authParam  = urlParams.get('auth');
+
+// Se veio do sistema com autenticação, pré-selecionar depto e bloquear troca
+if (deptoParam && authParam === 'ok') {
+    const selDepto = document.getElementById('depto');
+    selDepto.value = deptoParam;
+    selDepto.disabled = true;
+    selDepto.style.opacity = '0.7';
+    selDepto.style.cursor = 'not-allowed';
+    // Ocultar a aba de Consulta e Relatórios para usuário de depto
+    document.querySelectorAll('.tab-main')[1].style.display = 'none';
+    document.querySelectorAll('.tab-main')[2].style.display = 'none';
+}
+
 // Iniciar com 1 linha
 addPrestador();
 
