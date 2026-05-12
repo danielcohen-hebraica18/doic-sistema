@@ -116,6 +116,7 @@ body{font-family:'Inter',sans-serif;background:#060d18;color:#e2e8f0;min-height:
         <label>Departamento</label>
         <select id="login-depto">
           <option value="">Selecione seu departamento...</option>
+          <option value="__ADMIN__">🔑 Administrador</option>
         </select>
       </div>
       <div>
@@ -262,8 +263,12 @@ function fazerLogin() {
 
     if (!senha) { erro.textContent='Digite a senha.'; erro.style.display='block'; return; }
 
-    // Verificar senha de administrador (acesso total, sem precisar selecionar depto)
-    if (senha === SENHA_ADMIN) {
+    // Verificar senha de administrador (acesso total)
+    if (senha === SENHA_ADMIN || depto === '__ADMIN__') {
+        if (senha !== SENHA_ADMIN) {
+            erro.textContent='❌ Senha de administrador incorreta.';
+            erro.style.display='block'; return;
+        }
         deptoAtual = '__ADMIN__';
         document.getElementById('tela-login').style.display = 'none';
         document.getElementById('tela-sistema').style.display = 'block';
