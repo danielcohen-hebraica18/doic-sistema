@@ -6,7 +6,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>Sistema de Inteligência — Clube A Hebraica</title>
+    <title>Assistente IA - Depto de Segurança | Clube A Hebraica</title>
     <!-- Versão: 4.3 - DOIC-8000 Formatação Profissional Completa -->
     <!-- jsPDF para exportação PDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -1542,388 +1542,211 @@
             }
         }
     </style>
+<style id="hebraica-dark-theme">
+/* ═══════════════════════════════════════
+   TEMA ESCURO — TODOS OS MODAIS
+   Aplicado via CSS sem alterar HTML/JS
+═══════════════════════════════════════ */
 
-
-<style id="final-dark-fix">
-/* ═══════════════════════════════════════════════════════
-   FIX DEFINITIVO — DADOS E PAINEL TEMA ESCURO COMPLETO
-   Sobrescreve TODOS os estilos inline dos tab-content
-═══════════════════════════════════════════════════════ */
-
-/* MODAL COMPLETO */
+/* FUNDO PRINCIPAL DOS MODAIS */
 #dadosModal .modal-content,
 #adminModal .modal-content {
     background: #060d18 !important;
-    color: #e2e8f0 !important;
     border: 1px solid rgba(46,109,164,0.25) !important;
-    display: flex !important;
-    flex-direction: column !important;
+    color: #e2e8f0 !important;
 }
 
-/* MODAL BODY — LAYOUT COM SIDEBAR */
+/* HEADERS */
+#dadosModal .modal-header,
+#adminModal .modal-header {
+    background: linear-gradient(135deg, #080f1a 0%, #0d1b2a 100%) !important;
+    border-bottom: 1px solid rgba(46,109,164,0.25) !important;
+}
+#dadosModal .modal-header h2,
+#adminModal .modal-header h2 {
+    color: #ffffff !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+}
+#dadosModal .modal-header button,
+#adminModal .modal-header button {
+    color: rgba(148,163,184,0.7) !important;
+    background: rgba(255,255,255,0.08) !important;
+}
+
+/* BODY */
 #dadosModal .modal-body,
 #adminModal .modal-body {
-    display: flex !important;
-    flex-direction: row !important;
-    padding: 0 !important;
-    overflow: hidden !important;
-    flex: 1 !important;
     background: #060d18 !important;
-}
-
-/* TABS COMO SIDEBAR VERTICAL — coluna única */
-#dadosModal .tabs,
-#adminModal .tabs {
-    display: flex !important;
-    flex-direction: column !important;
-    flex-wrap: nowrap !important;
-    width: 195px !important;
-    min-width: 195px !important;
-    max-width: 195px !important;
-    background: linear-gradient(180deg, #080f1a 0%, #0d1b2a 100%) !important;
-    border-right: 1px solid rgba(46,109,164,0.2) !important;
-    padding: 10px 6px !important;
-    gap: 2px !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    flex-shrink: 0 !important;
-}
-
-/* BOTÕES DAS TABS */
-#dadosModal .tabs .tab,
-#adminModal .tabs .tab {
-    width: 100% !important;
-    padding: 9px 11px !important;
-    border-radius: 8px !important;
-    border: none !important;
-    background: transparent !important;
-    color: rgba(148,163,184,0.8) !important;
-    font-size: 11.5px !important;
-    font-weight: 500 !important;
-    text-align: left !important;
-    cursor: pointer !important;
-    transition: all 0.2s !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    display: block !important;
-}
-#dadosModal .tabs .tab:hover,
-#adminModal .tabs .tab:hover {
-    background: rgba(46,109,164,0.15) !important;
-    color: #e2e8f0 !important;
-}
-#dadosModal .tabs .tab.active,
-#adminModal .tabs .tab.active {
-    background: rgba(46,109,164,0.25) !important;
-    color: #93c5fd !important;
-    font-weight: 700 !important;
-    border-left: 2px solid #2E6DA4 !important;
-}
-
-/* CONTEÚDO DAS TABS — ÁREA PRINCIPAL */
-#dadosModal .tab-content,
-#adminModal .tab-content {
-    flex: 1 !important;
-    overflow-y: auto !important;
-    padding: 20px !important;
-    background: #060d18 !important;
-    display: none;
-}
-#dadosModal .tab-content.active,
-#adminModal .tab-content.active {
-    display: block !important;
-}
-
-/* H3 DENTRO DAS TABS — CORRIGIR COR ESCURA */
-#dadosModal .tab-content h3,
-#adminModal .tab-content h3 {
-    color: #ffffff !important;
-    font-size: 15px !important;
-    margin-bottom: 16px !important;
-    padding-bottom: 10px !important;
-    border-bottom: 1px solid rgba(46,109,164,0.2) !important;
-}
-#dadosModal .tab-content h4,
-#adminModal .tab-content h4 {
-    color: #93c5fd !important;
-    font-size: 13px !important;
 }
 
 /* TODOS OS TEXTOS */
-#dadosModal .tab-content *,
-#adminModal .tab-content * {
-    color: #e2e8f0 !important;
+#dadosModal *,
+#adminModal *,
+#modalEspecialista *,
+#modalPowerBI * {
+    color: #e2e8f0;
 }
-#dadosModal .tab-content label,
-#adminModal .tab-content label {
+#dadosModal h1, #dadosModal h2, #dadosModal h3, #dadosModal h4,
+#adminModal h1, #adminModal h2, #adminModal h3, #adminModal h4,
+#modalEspecialista h2, #modalEspecialista h3 {
+    color: #ffffff !important;
+}
+#dadosModal label, #adminModal label, #modalEspecialista label {
     color: rgba(148,163,184,0.85) !important;
-    font-size: 12px !important;
-    font-weight: 600 !important;
 }
-#dadosModal .tab-content small,
-#adminModal .tab-content small {
-    color: rgba(100,116,139,0.6) !important;
+#dadosModal small, #adminModal small {
+    color: rgba(100,116,139,0.7) !important;
 }
-#dadosModal .tab-content p,
-#adminModal .tab-content p {
+#dadosModal strong, #adminModal strong {
+    color: #93c5fd !important;
+}
+#dadosModal p, #adminModal p {
     color: rgba(148,163,184,0.8) !important;
 }
 
-/* INPUTS */
-#dadosModal .tab-content input,
-#dadosModal .tab-content select,
-#dadosModal .tab-content textarea,
-#adminModal .tab-content input,
-#adminModal .tab-content select,
-#adminModal .tab-content textarea {
-    background: rgba(255,255,255,0.05) !important;
-    border: 1px solid rgba(46,109,164,0.3) !important;
+/* TABS */
+#dadosModal .tab, #adminModal .tab,
+#dadosModal .tab-btn, #adminModal .tab-btn {
+    background: rgba(255,255,255,0.04) !important;
+    border: 1px solid rgba(46,109,164,0.2) !important;
+    color: rgba(148,163,184,0.8) !important;
+    border-radius: 6px !important;
+    transition: all 0.2s !important;
+}
+#dadosModal .tab:hover, #adminModal .tab:hover {
+    background: rgba(46,109,164,0.15) !important;
     color: #e2e8f0 !important;
-    border-radius: 8px !important;
 }
-#dadosModal .tab-content input::placeholder,
-#dadosModal .tab-content textarea::placeholder,
-#adminModal .tab-content input::placeholder,
-#adminModal .tab-content textarea::placeholder {
-    color: rgba(100,116,139,0.5) !important;
-}
-
-/* TABELAS */
-#dadosModal .tab-content table,
-#adminModal .tab-content table { width: 100%; border-collapse: collapse; }
-#dadosModal .tab-content th,
-#adminModal .tab-content th {
-    background: #0d1b2a !important;
-    color: #93c5fd !important;
-    border-bottom: 2px solid rgba(46,109,164,0.3) !important;
-    padding: 10px 12px !important;
-    font-size: 11px !important;
-    text-transform: uppercase !important;
-    letter-spacing: 1px !important;
-    text-align: left !important;
-}
-#dadosModal .tab-content td,
-#adminModal .tab-content td {
-    padding: 9px 12px !important;
-    border-bottom: 1px solid rgba(46,109,164,0.1) !important;
-    color: #cbd5e1 !important;
-    font-size: 13px !important;
-}
-#dadosModal .tab-content tr:hover td,
-#adminModal .tab-content tr:hover td {
-    background: rgba(46,109,164,0.08) !important;
-}
-
-/* BOTÕES DE AÇÃO */
-#dadosModal .tab-content .btn,
-#dadosModal .tab-content button:not(.tab),
-#adminModal .tab-content .btn,
-#adminModal .tab-content button:not(.tab) {
+#dadosModal .tab.active, #adminModal .tab.active,
+#dadosModal .tab-btn.active, #adminModal .tab-btn.active {
     background: linear-gradient(135deg, #1B3A5C, #2E6DA4) !important;
     color: #ffffff !important;
-    border: none !important;
-    border-radius: 8px !important;
-    padding: 9px 16px !important;
-    font-size: 13px !important;
+    border-color: transparent !important;
     font-weight: 600 !important;
-    cursor: pointer !important;
-}
-#dadosModal .tab-content .btn-danger,
-#adminModal .tab-content .btn-danger {
-    background: linear-gradient(135deg, #7f1d1d, #dc2626) !important;
 }
 
-/* CARDS INTERNOS */
-#dadosModal .tab-content [style*="background: white"],
-#dadosModal .tab-content [style*="background:white"],
-#dadosModal .tab-content [style*="background: #f"],
-#dadosModal .tab-content [style*="background:#f"],
-#adminModal .tab-content [style*="background: white"],
-#adminModal .tab-content [style*="background:white"],
-#adminModal .tab-content [style*="background: #f"],
-#adminModal .tab-content [style*="background:#f"] {
-    background: #0d1b2a !important;
-    border: 1px solid rgba(46,109,164,0.2) !important;
-    border-radius: 8px !important;
-}
-
-/* INFO BANNER ADMIN */
-#adminModal .info-banner {
-    background: rgba(46,109,164,0.1) !important;
-    border: 1px solid rgba(46,109,164,0.25) !important;
-    border-left: 4px solid #2E6DA4 !important;
-    border-radius: 8px !important;
-    padding: 12px 16px !important;
-    margin-bottom: 16px !important;
-    color: #e2e8f0 !important;
-}
-
-/* SUCCESS MESSAGE */
-#dadosModal .success-message,
-#adminModal #successMessage {
-    background: rgba(22,163,74,0.15) !important;
-    border: 1px solid rgba(22,163,74,0.3) !important;
-    color: #86efac !important;
-    border-radius: 8px !important;
-    padding: 10px 16px !important;
-}
-
-/* PROCEDURE CARDS */
-#adminModal .procedure-card {
-    background: #0d1b2a !important;
-    border: 1px solid rgba(46,109,164,0.2) !important;
-    border-left: 3px solid #2E6DA4 !important;
-    border-radius: 8px !important;
-    padding: 14px !important;
-    margin-bottom: 10px !important;
-}
-
-/* STAT CARDS */
-#adminModal .stat-card {
-    background: #0d1b2a !important;
-    border: 1px solid rgba(46,109,164,0.2) !important;
-    border-radius: 10px !important;
-    text-align: center !important;
-    padding: 16px !important;
-}
-</style>
-<style id="final-font-esp">
-/* ── Fontes Painel e Dados igual ao Especialista ── */
-#dadosModal .tabs .tab,
-#adminModal .tabs .tab {
-    font-size: 12px !important;
-}
+/* CONTEÚDO DAS TABS */
 #dadosModal .tab-content,
-#dadosModal .tab-content *,
-#adminModal .tab-content,
-#adminModal .tab-content * {
-    font-size: 13px !important;
-}
-#dadosModal .tab-content h3,
-#adminModal .tab-content h3 {
-    font-size: 15px !important;
-}
-#dadosModal .tab-content th,
-#adminModal .tab-content th {
-    font-size: 11px !important;
-}
-#dadosModal .tab-content small,
-#adminModal .tab-content small {
-    font-size: 11px !important;
+#adminModal .tab-content {
+    background: #060d18 !important;
+    color: #e2e8f0 !important;
 }
 
-/* ── Especialista: fundo preto, letras brancas ── */
-#modalEspecialista {
-    background: rgba(0,0,0,0.8) !important;
-}
-#modalEspecialista > div {
-    background: #060d18 !important;
-    border: 1px solid rgba(46,109,164,0.3) !important;
-    border-radius: 12px !important;
-    color: #e2e8f0 !important;
-}
-/* Header do modal Especialista */
-#modalEspecialista > div > div:first-child {
-    background: linear-gradient(135deg, #080f1a 0%, #0d1b2a 100%) !important;
-    border-bottom: 1px solid rgba(46,109,164,0.25) !important;
-    border-radius: 12px 12px 0 0 !important;
-}
-/* Área do formulário */
-#modalEspecialista > div > div:nth-child(2) {
-    background: #060d18 !important;
-    padding: 20px 24px !important;
-}
-/* Cards das seções */
-#modalEspecialista div[style*="background:white"],
-#modalEspecialista div[style*="background: white"],
-#modalEspecialista div[style*="background:#fff"],
-#modalEspecialista div[style*="background: #fff"],
-#modalEspecialista div[style*="background:#f8"],
-#modalEspecialista div[style*="background: #f8"] {
-    background: #0d1b2a !important;
-    border-color: rgba(46,109,164,0.2) !important;
-    color: #e2e8f0 !important;
-}
-/* Todos os textos */
-#modalEspecialista * {
-    color: #e2e8f0 !important;
-}
-#modalEspecialista h2,
-#modalEspecialista h3,
-#modalEspecialista strong {
-    color: #ffffff !important;
-}
-#modalEspecialista label {
-    color: rgba(148,163,184,0.85) !important;
-    font-size: 12px !important;
-    font-weight: 600 !important;
-}
-#modalEspecialista small,
-#modalEspecialista [style*="color:#64748b"],
-#modalEspecialista [style*="color: #64748b"] {
-    color: rgba(100,116,139,0.7) !important;
-}
-/* Inputs e selects */
-#modalEspecialista input,
-#modalEspecialista select,
-#modalEspecialista textarea {
+/* INPUTS, SELECTS, TEXTAREAS */
+#dadosModal input, #dadosModal select, #dadosModal textarea,
+#adminModal input, #adminModal select, #adminModal textarea,
+#modalEspecialista input, #modalEspecialista select, #modalEspecialista textarea {
     background: rgba(255,255,255,0.05) !important;
     border: 1px solid rgba(46,109,164,0.3) !important;
     color: #e2e8f0 !important;
     border-radius: 8px !important;
 }
-#modalEspecialista input::placeholder,
-#modalEspecialista textarea::placeholder {
+#dadosModal input::placeholder, #adminModal input::placeholder,
+#dadosModal textarea::placeholder, #adminModal textarea::placeholder,
+#modalEspecialista input::placeholder, #modalEspecialista textarea::placeholder {
     color: rgba(100,116,139,0.5) !important;
 }
+#dadosModal select option, #adminModal select option,
 #modalEspecialista select option {
     background: #0d1b2a !important;
     color: #e2e8f0 !important;
 }
-/* Aviso espaço total */
-#modalEspecialista #aviso_espaco_total {
-    background: rgba(245,158,11,0.1) !important;
-    border-color: rgba(245,158,11,0.4) !important;
-    color: #fcd34d !important;
+
+/* TABELAS */
+#dadosModal table, #adminModal table { width: 100%; border-collapse: collapse; }
+#dadosModal th, #adminModal th {
+    background: #0d1b2a !important;
+    color: #93c5fd !important;
+    border-bottom: 1px solid rgba(46,109,164,0.3) !important;
+    font-size: 11px !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    padding: 10px 12px !important;
 }
-/* Status */
-#especialistaStatus {
-    color: rgba(148,163,184,0.7) !important;
+#dadosModal td, #adminModal td {
+    color: #cbd5e1 !important;
+    border-bottom: 1px solid rgba(46,109,164,0.1) !important;
+    padding: 9px 12px !important;
 }
-/* Botão gerar */
-#btnGerarEspecialista {
-    background: linear-gradient(135deg, #0D1B2A 0%, #1B3A5C 100%) !important;
-    border: 1px solid rgba(46,109,164,0.4) !important;
+#dadosModal tr:hover td, #adminModal tr:hover td {
+    background: rgba(46,109,164,0.08) !important;
 }
-#btnGerarEspecialista:hover {
-    filter: brightness(1.15) !important;
+
+/* CARDS E SEÇÕES */
+#dadosModal .stat-card, #adminModal .stat-card,
+#dadosModal .card, #adminModal .card,
+#dadosModal .info-card, #adminModal .info-card,
+#dadosModal .section-card, #adminModal .section-card {
+    background: #0d1b2a !important;
+    border: 1px solid rgba(46,109,164,0.2) !important;
+    border-radius: 10px !important;
+    color: #e2e8f0 !important;
+}
+#adminModal .info-banner {
+    background: rgba(46,109,164,0.1) !important;
+    border-left: 4px solid #2E6DA4 !important;
+    border-radius: 8px !important;
+}
+#adminModal .procedure-card {
+    background: #0d1b2a !important;
+    border: 1px solid rgba(46,109,164,0.2) !important;
+    border-left: 4px solid #2E6DA4 !important;
+}
+
+/* BOTÕES DE AÇÃO */
+#dadosModal button:not(.tab):not(.modal-header button):not(.close-btn),
+#adminModal button:not(.tab):not(.tab-btn):not(.modal-header button):not(.close-btn) {
+    background: linear-gradient(135deg, #1B3A5C, #2E6DA4) !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 8px !important;
+}
+#dadosModal .btn-danger, #adminModal .btn-danger {
+    background: linear-gradient(135deg, #7f1d1d, #dc2626) !important;
+}
+
+/* ESTATÍSTICAS */
+#adminModal .stat-number { color: #93c5fd !important; font-size: 28px !important; font-weight: 700 !important; }
+#adminModal .stat-label  { color: rgba(148,163,184,0.7) !important; font-size: 12px !important; }
+
+/* SCROLLBAR */
+#dadosModal ::-webkit-scrollbar, #adminModal ::-webkit-scrollbar { width: 5px; }
+#dadosModal ::-webkit-scrollbar-track, #adminModal ::-webkit-scrollbar-track { background: #060d18; }
+#dadosModal ::-webkit-scrollbar-thumb, #adminModal ::-webkit-scrollbar-thumb { background: rgba(46,109,164,0.4); border-radius: 3px; }
+
+/* FUNDO DO ESPECIALISTA */
+#modalEspecialista > div {
+    background: #060d18 !important;
+    border: 1px solid rgba(46,109,164,0.25) !important;
+}
+#modalEspecialista .modal-header,
+#modalEspecialista > div > div:first-child {
+    background: linear-gradient(135deg, #0D1B2A, #1B3A5C) !important;
+}
+#modalEspecialista > div > div:nth-child(2) {
+    background: #060d18 !important;
+}
+
+/* CARDS DO FORMULÁRIO ESPECIALISTA */
+#modalEspecialista > div > div > div[style*="background:white"],
+#modalEspecialista > div > div > div[style*="background: white"] {
+    background: #0d1b2a !important;
+    border-color: rgba(46,109,164,0.2) !important;
+}
+
+/* ANIMAÇÃO SUAVE DE ABERTURA */
+#dadosModal.modal.active,
+#adminModal.active {
+    animation: fadeIn 0.15s ease !important;
 }
 </style>
 </head>
 <body>
     <!-- Verificação de autenticação -->
     <script>
-        // Verificar token JWT
-        const _token = sessionStorage.getItem('hebraica_token');
-        if (!_token) {
+        if (sessionStorage.getItem('hebraica_auth') !== 'true') {
             window.location.href = 'index.html';
-        } else {
-            // Verificar se token ainda é válido
-            fetch('https://web-production-f8165.up.railway.app/auth/verificar', {
-                headers: { 'Authorization': 'Bearer ' + _token }
-            }).then(r => r.json()).then(d => {
-                if (!d.ok) {
-                    sessionStorage.removeItem('hebraica_token');
-                    window.location.href = 'index.html';
-                }
-            }).catch(() => {});
-        }
-
-        // Helper para requisições autenticadas
-        function authHeaders() {
-            const t = sessionStorage.getItem('hebraica_token');
-            return { 'Authorization': 'Bearer ' + t, 'Content-Type': 'application/json' };
         }
     </script>
     
@@ -1973,16 +1796,6 @@
                         <span style="font-size:14px;">📊</span> Base de Dados
                     </button>
 
-
-                    <button onclick="abrirPowerBI()" style="width:100%;padding:6px 10px;border-radius:7px;border:none;cursor:pointer;display:flex;align-items:center;gap:8px;font-size:11px;font-weight:600;background:rgba(30,58,92,0.7);color:#93c5fd;text-align:left;transition:all 0.2s;" onmouseover="this.style.background='rgba(46,109,164,0.25)'" onmouseout="this.style.background='rgba(30,58,92,0.7)'">
-                        <span style="font-size:14px;">📈</span> Power BI
-                    </button>
-
-                    <button onclick="openMVM()" style="width:100%;padding:6px 10px;border-radius:7px;border:none;cursor:pointer;display:flex;align-items:center;gap:8px;font-size:11px;font-weight:600;background:rgba(30,58,92,0.7);color:#93c5fd;text-align:left;transition:all 0.2s;" onmouseover="this.style.background='rgba(46,109,164,0.25)'" onmouseout="this.style.background='rgba(30,58,92,0.7)'">
-                        <span style="font-size:14px;">✅</span> Sistema de Checagem
-                    </button>
-
-
                     <button onclick="window.open('https://app.selecaosegura.com.br/','_blank')" style="width:100%;padding:6px 10px;border-radius:7px;border:none;cursor:pointer;display:flex;align-items:center;gap:8px;font-size:11px;font-weight:600;background:rgba(30,58,92,0.7);color:#93c5fd;text-align:left;transition:all 0.2s;" onmouseover="this.style.background='rgba(46,109,164,0.25)'" onmouseout="this.style.background='rgba(30,58,92,0.7)'">
                         <span style="font-size:14px;">🔒</span> Seleção Segura
                     </button>
@@ -1990,6 +1803,10 @@
                     <button onclick="openAdminPanel()" style="width:100%;padding:6px 10px;border-radius:7px;border:none;cursor:pointer;display:flex;align-items:center;gap:8px;font-size:11px;font-weight:600;background:rgba(30,58,92,0.7);color:#93c5fd;text-align:left;transition:all 0.2s;" onmouseover="this.style.background='rgba(46,109,164,0.25)'" onmouseout="this.style.background='rgba(30,58,92,0.7)'">
                         <span style="font-size:14px;">⚙️</span> Painel do Gestor
                         <span id="pendingCount" style="display:none;background:#f59e0b;color:#1c1917;padding:1px 5px;border-radius:8px;font-size:9px;font-weight:700;margin-left:auto;">0</span>
+                    </button>
+
+                    <button onclick="abrirPowerBI()" style="width:100%;padding:6px 10px;border-radius:7px;border:none;cursor:pointer;display:flex;align-items:center;gap:8px;font-size:11px;font-weight:600;background:rgba(30,58,92,0.7);color:#93c5fd;text-align:left;transition:all 0.2s;" onmouseover="this.style.background='rgba(46,109,164,0.25)'" onmouseout="this.style.background='rgba(30,58,92,0.7)'">
+                        <span style="font-size:14px;">📈</span> Power BI
                     </button>
 
                 </div>
@@ -2032,10 +1849,13 @@
             </div>
             <div class="modal-body">
                 <div id="successMessage" class="success-message">✅ Operação realizada com sucesso!</div>
-
+                <div class="info-banner">
+                    <strong>📌 Clube A Hebraica - Departamento de Segurança</strong>
+                    <p>Configure aqui todos os procedimentos operacionais da equipe de segurança.</p>
+                </div>
                 <div class="tabs">
                     <button class="tab active" onclick="switchTab('add')">➕ Adicionar Procedimento</button>
-                    
+                    <button class="tab" onclick="switchTab('shortcuts')">⚡ Configurar Atalhos</button>
                     <button class="tab" onclick="switchTab('logos')">🎨 Logos</button>
                     <button class="tab" onclick="switchTab('backup')">💾 Backup/Restaurar</button>
                     <button class="tab" onclick="switchTab('pending')">📥 Pendentes <span id="pendingTabCount">(0)</span></button>
@@ -2046,7 +1866,10 @@
                 <div class="tab-content active" id="addTab">
                     <h3 style="margin-bottom: 20px; color: #1e293b;">➕ Cadastrar Novo Procedimento de Segurança</h3>
                     
-    
+                    <div class="info-banner" style="background: #dcfce7; border-left: 4px solid #10b981; margin-bottom: 20px;">
+                        <strong style="color: #065f46;">✅ Formulário Simplificado - Sem código!</strong>
+                        <p style="color: #047857; margin-top: 8px;">Preencha os campos abaixo com texto normal. O sistema formata automaticamente!</p>
+                    </div>
 
                     <div class="form-group">
                         <label>Título do Procedimento *</label>
@@ -2107,7 +1930,7 @@ Aguardar bombeiros em local seguro" style="width: 100%; padding: 12px; border: 2
 
                     <button class="btn btn-primary" onclick="addNewProcedureSimple()">✅ Adicionar Procedimento</button>
                 </div>
-                
+                <div class="tab-content" id="shortcutsTab"><div id="shortcutsList"></div></div>
                 <div class="tab-content" id="logosTab">
                     <h3 style="margin-bottom: 20px; color: #1e293b;">🎨 Configurar Logos</h3>
                     <div style="margin-bottom: 30px;">
@@ -3083,21 +2906,6 @@ ${userMessage}`
             });
             const timeFormatted = today.toLocaleTimeString('pt-BR');
 
-            // Buscar dados de checagem para contexto da IA
-            let checagemContext = 'Dados de checagem não disponíveis no momento.';
-            try {
-                const chResp = await fetch('https://web-production-f8165.up.railway.app/checagem/stats');
-                if (chResp.ok) {
-                    const chData = await chResp.json();
-                    const porDepto = chData.por_departamento || {};
-                    const linhas = Object.entries(porDepto)
-                        .sort((a,b) => b[1].total - a[1].total)
-                        .map(([d, s]) => `${d}: ${s.total} checados (✅${s.aprovados} aprovados, ❌${s.negados} negados, ⏳${s.pendentes} pendentes)`)
-                        .join('\n');
-                    checagemContext = `Total geral: ${chData.total} prestadores checados\nAprovados: ${chData.aprovados} | Negados: ${chData.negados} | Pendentes: ${chData.pendentes}\n\nPor departamento:\n${linhas}`;
-                }
-            } catch(e) { console.log('Checagem context error:', e); }
-
             const systemPrompt = `VOCÊ É O ASSISTENTE DE IA DO DEPARTAMENTO DE SEGURANÇA DO CLUBE A HEBRAICA, SÃO PAULO.
 
 DATA E HORA ATUAL:
@@ -3156,65 +2964,7 @@ INSTRUÇÕES GERAIS:
 - Seja direto, objetivo e profissional
 - Identifique o TIPO de pergunta ANTES de responder
 - NÃO misture clube com inteligência
-- Se não souber algo específico do clube, diga para consultar a recepção${knowledgeContext}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-3️⃣ PERGUNTAS SOBRE CHECAGEM DE PRESTADORES:
-   → Consulte os dados em tempo real via fetch ao endpoint de stats
-   → Responda com dados precisos por departamento
-   → Exemplos de perguntas: "quantas checagens teve o RH?", "quais deptos têm pendências?", "total de aprovados em maio?"
-   
-DADOS DE CHECAGEM DISPONÍVEIS (atualizar via API):
-${checagemContext}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-4️⃣ GERAÇÃO DE RELATÓRIO DE OCORRÊNCIA:
-Quando o usuário pedir para "gerar relatório", "criar relatório", "registrar ocorrência" ou similar:
-
-PASSO 1 — Pergunte TODOS estes dados de uma vez:
-"Para gerar o relatório, preciso das seguintes informações:
-📅 Data do incidente:
-📋 Assunto/Tipo de ocorrência:
-👤 Relator (nome):
-🏢 Solicitante/Depto:
-⏰ Cronologia (liste cada horário e o que aconteceu):
-🔍 Análise das imagens/fatos observados:
-✅ Providências adotadas:
-📎 Anexos e recomendações:"
-
-PASSO 2 — Com os dados recebidos, gere SEMPRE neste formato:
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-RELATÓRIO DE OCORRÊNCIA — SEGURANÇA
-CLUBE A HEBRAICA DE SÃO PAULO
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Data do Incidente: [data]
-Data da Solicitação: [hoje]
-Relator: [nome]
-Solicitante: [depto/pessoa]
-
-1. SÍNTESE DO EVENTO
-[2-3 frases resumindo o incidente de forma profissional]
-
-2. CRONOLOGIA DOS FATOS
-Horário | Descrição
-[HH:MM] | [descrição do evento]
-[HH:MM] | [descrição do evento]
-
-3. ANÁLISE DAS IMAGENS / FATOS OBSERVADOS
-[O que foi verificado, observado ou analisado no CFTV ou no local]
-
-4. PROVIDÊNCIAS ADOTADAS
-[Lista das ações tomadas]
-
-5. CONCLUSÃO E RECOMENDAÇÕES
-[Conclusão objetiva + recomendações]
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Relator: [nome] | Central de Segurança Hebraica
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-Use linguagem formal, técnica e objetiva. Mesmo padrão sempre, independente do relator. Ao final pergunte se deseja ajustar.`;
+- Se não souber algo específico do clube, diga para consultar a recepção${knowledgeContext}`;
 
             const response = await fetch('https://api.openai.com/v1/chat/completions', {
                 method: 'POST',
@@ -5294,7 +5044,7 @@ Use linguagem formal, técnica e objetiva. Mesmo padrão sempre, independente do
                 // Busca notícias em tempo real + estrutura dados + retorna JSON pronto
                 console.log('📡 Chamando /api/gerar-relatorio (pipeline DOIC-8000 completo)...');
 
-                const relatorioResponse = await fetch('/api/gerar-relatorio', {
+                const relatorioResponse = await fetch('https://web-production-f8165.up.railway.app/gerar-relatorio', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ timestamp: new Date().toISOString() })
@@ -6780,8 +6530,7 @@ async function gerarPDFComJsPDF(result) {
         function logout() {
             if (confirm('Deseja sair do sistema?')) {
                 sessionStorage.clear();
-                localStorage.removeItem('hebraica_token');
-                window.location.replace('index.html');
+                window.location.replace('index.html';
             }
         }
 
@@ -8441,7 +8190,7 @@ async function gerarPDFComJsPDF(result) {
             const fields = {
                 'Data da Solicitação': dataSolicitacao,
                 'Data do Incidente': dataIncidente,
-                'Relator': relator ? [relator] : []
+                'Relator': relator
             };
 
             if (solicitante) fields['Solicitante Hebraica'] = solicitante;
@@ -9062,7 +8811,7 @@ async function gerarPDFComJsPDF(result) {
                     <button class="tab" onclick="switchDadosTab('chaves')">🔑 Controle Chaves</button>
                     <button class="tab" onclick="switchDadosTab('historico')">📜 Histórico Chaves</button>
                     <button class="tab" onclick="switchDadosTab('imagem')">📸 Solicitação Imagem</button>
-                    
+                    <button class="tab" onclick="switchDadosTab('export')">📥 Export PBI</button>
                 </div>
 
                 <div class="tab-content active" id="ocorrenciasTab">
@@ -10016,7 +9765,10 @@ async function gerarPDFComJsPDF(result) {
                     <div id="listaImagens" style="overflow-x:auto;"></div>
                 </div>
 
-                
+                <div class="tab-content" id="exportTab">
+                    <h3 style="margin-bottom:20px;color:#1e293b;">📥 Exportar Power BI</h3>
+                    <p>🚧 Exportação em desenvolvimento...</p>
+                </div>
             </div>
         </div>
     </div>
@@ -10163,13 +9915,18 @@ async function gerarPDFComJsPDF(result) {
             <input id="esp_horas_montagem" type="number" min="0" placeholder="Ex: 4" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
           </div>
 
-          
-
-
+          <div>
+            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Jornada Vigilante — Montagem</label>
+            <select id="esp_horas_vig_montagem" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+              <option value="8">8 horas — R$ 344,50/vig</option>
+              <option value="6">6 horas — R$ 261,00/vig</option>
+              <option value="12">12 horas — R$ 518,00/vig</option>
+            </select>
+          </div>
 
           <div>
-            <label style="font-size:11px;font-weight:600;color:rgba(148,163,184,0.85);display:block;margin-bottom:3px;">Dias de Desmontagem</label>
-            <input id="esp_dias_desmontagem" type="number" min="0" placeholder="Ex: 1" style="width:100%;padding:8px 10px;background:rgba(255,255,255,0.04);border:1px solid rgba(46,109,164,0.25);border-radius:6px;font-size:13px;box-sizing:border-box;color:#e2e8f0;">
+            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Dia de Desmontagem</label>
+            <input id="esp_data_desmontagem" type="date" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
           </div>
 
           <div>
@@ -10177,9 +9934,23 @@ async function gerarPDFComJsPDF(result) {
             <input id="esp_horas_desmontagem" type="number" min="0" placeholder="Ex: 3" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
           </div>
 
-          
+          <div>
+            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Jornada Vigilante — Desmontagem</label>
+            <select id="esp_horas_vig_desmontagem" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+              <option value="6">6 horas — R$ 261,00/vig</option>
+              <option value="8">8 horas — R$ 344,50/vig</option>
+              <option value="12">12 horas — R$ 518,00/vig</option>
+            </select>
+          </div>
 
-          
+          <div style="grid-column:1/-1;">
+            <label style="font-size:11px;font-weight:600;color:#374151;display:block;margin-bottom:3px;">Jornada Vigilante — Evento</label>
+            <select id="esp_horas_vig_evento" style="width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;box-sizing:border-box;">
+              <option value="12">12 horas — R$ 518,00/vig</option>
+              <option value="8">8 horas — R$ 344,50/vig</option>
+              <option value="6">6 horas — R$ 261,00/vig</option>
+            </select>
+          </div>
 
         </div>
       </div>
@@ -10501,9 +10272,6 @@ function fecharPowerBI() {
     document.body.style.overflow = '';
 }
 </script>
-
-
-
 
 </body>
 </html>
