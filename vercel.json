@@ -5,11 +5,5 @@
       "memory": 3008,
       "maxDuration": 300
     }
-  },
-  "rewrites": [
-    { "source": "/sistema.html", "destination": "/sistema.html" },
-    { "source": "/index.html", "destination": "/index.html" },
-    { "source": "/checagem.html", "destination": "/checagem.html" },
-    { "source": "/policia.html", "destination": "/policia.html" }
-  ]
+  }
 }
