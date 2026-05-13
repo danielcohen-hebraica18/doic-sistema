@@ -253,12 +253,20 @@ const RAILWAY = 'https://web-production-f8165.up.railway.app';
 })();
 
 // Senhas validadas no servidor — não ficam no navegador
+const DEPTOS = [
+    "After School","Agenda","Ateliê de Artes","Banco Safra","CHAVERIM",
+    "CK","Compras","Concessões","Comunicação","Cultura Judaica","Danças",
+    "Daniel Whatsapp","Espaço Bebê","Garageinn","Grandes Festas","Esportivo",
+    "Festival Carmel","Hebraikeinu","Hadventure","Informática","Brinquedoteca",
+    "Juventude","Marketing","Maternal","Música","Depto. Médico","Patrimônio",
+    "Presidência","RH","Secretaria","Segurança","Renovação","Social","60 Mais","Teatro"
+];
 
 let deptoAtual = '';
 
-// Preencher select de login
+// Preencher select de login com os departamentos
 const selLogin = document.getElementById('login-depto');
-Object.keys(SENHAS).sort().forEach(d => {
+DEPTOS.sort().forEach(d => {
     const o = document.createElement('option');
     o.value = d; o.textContent = d;
     selLogin.appendChild(o);
