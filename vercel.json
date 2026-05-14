@@ -1,18 +1,1 @@
-{
-  "version": 2,
-  "functions": {
-    "api/*.js": {
-      "memory": 3008,
-      "maxDuration": 300
-    },
-    "api/gerar-pdf.py": {
-      "runtime": "python3.9",
-      "memory": 1024,
-      "maxDuration": 60
-    }
-  },
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" },
-    { "source": "/(.*)", "destination": "/sistema.html" }
-  ]
-}
+{"version":2,"functions":{"api/*.js":{"memory":3008,"maxDuration":300}},"rewrites":[{"source":"/api/(.*)","destination":"/api/$1"},{"source":"/(.*)","destination":"/sistema.html"}]}
