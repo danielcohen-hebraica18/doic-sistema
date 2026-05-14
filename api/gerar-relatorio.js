@@ -16,8 +16,7 @@ module.exports = async function handler(req, res) {
     const railwayRes = await fetch(`${RAILWAY_URL}/gerar-relatorio`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ timestamp: new Date().toISOString() }),
-      signal: AbortSignal.timeout(280000)
+      body: JSON.stringify({ timestamp: new Date().toISOString() })
     });
 
     if (!railwayRes.ok) {
@@ -32,7 +31,7 @@ module.exports = async function handler(req, res) {
     res.send(Buffer.from(pdf));
 
   } catch (err) {
-    console.error('Erro:', err);
-    res.status(500).json({ error: err.message });
+    console.error('Erro:', err.message);
+    res.status(500).json({ error: 'Erro no servico de PDF', details: err.message });
   }
 };
