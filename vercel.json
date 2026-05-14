@@ -1,12 +1,4 @@
 {
-{
-  "version": 2,
-  "functions": {
-    "api/*.js": {
-      "memory": 3008,
-      "maxDuration": 300
-    }
-  },
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" },
     { "source": "/(.*)", "destination": "/sistema.html" }
