@@ -8,6 +8,10 @@
 //   RAILWAY_PDF_URL = https://SEU-APP.railway.app
 // ============================================================================
 
+export const config = {
+  maxDuration: 300,
+};
+
 module.exports = async function handler(req, res) {
 
   res.setHeader('Access-Control-Allow-Origin', '*');
