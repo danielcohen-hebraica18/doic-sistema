@@ -338,40 +338,21 @@
             }).catch(() => {});
         }
 
-        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const email = document.getElementById('email').value;
-            const senha = document.getElementById('password').value;
-            const errEl = document.getElementById('errorMessage');
-            const btn   = e.target.querySelector('button[type="submit"]');
-
-            btn.disabled = true;
-            btn.textContent = 'Verificando...';
-            errEl.style.display = 'none';
-
-            try {
-                const resp = await fetch(`${RAILWAY}/auth/login`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, senha })
-                });
-                const data = await resp.json();
-                if (data.ok && data.token) {
-                    sessionStorage.setItem('hebraica_token', data.token);
-                    sessionStorage.setItem('hebraica_user', email);
-                    window.location.href = 'sistema.html';
-                } else {
-                    errEl.textContent = data.error || '⚠️ Credenciais inválidas.';
-                    errEl.style.display = 'block';
-                }
-            } catch(err) {
-                errEl.textContent = '⚠️ Erro de conexão. Tente novamente.';
-                errEl.style.display = 'block';
+            const email    = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            if (email === 'admin@hebraica.com.br' && password === 'Hebraica@2026') {
+                sessionStorage.setItem('hebraica_auth', 'true');
+                sessionStorage.setItem('hebraica_user', email);
+                window.location.href = 'sistema.html';
+            } else {
+                document.getElementById('errorMessage').style.display = 'block';
             }
-
-            btn.disabled = false;
-            btn.textContent = 'Acessar o Sistema';
         });
+        if (sessionStorage.getItem('hebraica_auth') === 'true') {
+            window.location.href = 'sistema.html';
+        }
     </script>
 </body>
 </html>
