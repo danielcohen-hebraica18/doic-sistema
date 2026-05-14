@@ -304,8 +304,6 @@
     </div>
 
     <script>
-        const RAILWAY = 'https://web-production-f8165.up.railway.app';
-
         // Carregar logo salvo
         const savedLogo = localStorage.getItem('hebraica_login_logo');
         if (savedLogo) {
@@ -325,17 +323,6 @@
                 localStorage.setItem('hebraica_login_logo', data);
             };
             reader.readAsDataURL(input.files[0]);
-        }
-
-        // Verificar se já tem token válido
-        const tokenSalvo = sessionStorage.getItem('hebraica_token');
-        if (tokenSalvo) {
-            fetch(`${RAILWAY}/auth/verificar`, {
-                headers: { 'Authorization': `Bearer ${tokenSalvo}` }
-            }).then(r => r.json()).then(d => {
-                if (d.ok) window.location.href = 'sistema.html';
-                else sessionStorage.removeItem('hebraica_token');
-            }).catch(() => {});
         }
 
         document.getElementById('loginForm').addEventListener('submit', function(e) {
